@@ -55,7 +55,7 @@ Aallonpituus saatiin laskemalla valonnopeus (n. **300000000** m/s) / taajuus (11
 
 ## b) Moduwhat?
 
-Nyt kokeillaan kunnella toista kanavaa samasta radiosta eri modulaatiolle. Koska aiemmassa käytin AM-modulaatiota, siirryn nyt käyttämään FM-modulaatiota. Löysin kanadalaisen radion, jossa oli alkuun meneillään jokin puheohjelma, jonka jälkeen tuli CTV News Toronton keskipäivän uutiset (tätä tehtävää tehtäessä kello oli 19.00 Suomessa, joten Kanadassa kello on 12.00). FM-modulaatiolla tutkiessa ääntä oli huomattavasti vaikeampaa saada selkeäksi ja kuuntelukelpoiseksi, vaikka kuinka hienovaraisesti yritti taajuuksia ja kaistanleveyttä säätää. Lopulta sain videokaappaukseen pienen pätkän uutislähetystä, mutta häiriöitä tuli enemmän kuin AM-modulaatiolla:
+Nyt kokeillaan kunnella toista kanavaa samasta radiosta eri modulaatiolla. Koska aiemmassa käytin AM-modulaatiota, siirryn nyt käyttämään FM-modulaatiota. Löysin kanadalaisen radion, jossa oli alkuun meneillään jokin puheohjelma, jonka jälkeen tuli CTV News Toronton keskipäivän uutiset (tätä tehtävää tehtäessä kello oli 19.00 Suomessa, joten Kanadassa kello on 12.00). FM-modulaatiolla tutkiessa ääntä oli huomattavasti vaikeampaa saada selkeäksi ja kuuntelukelpoiseksi, vaikka kuinka hienovaraisesti yritti taajuuksia ja kaistanleveyttä säätää. Lopulta sain videokaappaukseen pienen pätkän suhteellisen selkeää uutislähetystä, mutta häiriöitä tuli enemmän kuin AM-modulaatiolla:
 
 <details>
 <summary>Näytä videokaappaus</summary>
