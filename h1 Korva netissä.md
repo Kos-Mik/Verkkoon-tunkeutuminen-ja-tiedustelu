@@ -51,7 +51,7 @@ Eli tiivistettynä radiolähetyksellä on seuraavat speksit:
 - **Modulaatio**: AM
 - **Aallonpituus**: n. 252 m
 
-Aallonpituus saatiin laskemalla valonnopeus (n. **300000000** m/s) / taajuus (1190,01 kHz = **1190010** Hz).
+Aallonpituus saatiin laskemalla valonnopeus (n. **300000000** m/s) / taajuus (1190,01 kHz = **1190010** Hz) (Wikikirjasto).
 
 ## b) Moduwhat?
 
@@ -78,4 +78,5 @@ Radioähetyksen speksit:
 - IPCisco.com. WLAN Frequency Bands. Luettavissa: https://ipcisco.com/lesson/wlan-frequency-bands/. Luettu: 21.10.2026.
 - Karvinen, T. 2026. Verkkoon tunkeutuminen ja tiedustelu. Luettavissa: https://terokarvinen.com/verkkoon-tunkeutuminen-ja-tiedustelu/. Luettu: 22.10.2026.
 - Traficom. Matkaviestinverkkojen taajuudet ja luvanhaltijat. Luettavissa: https://www.traficom.fi/fi/radioluvat-ja-taajuudet/radiotaajuuksien-kaytto/matkaviestinverkkojen-taajuudet-ja-luvanhaltijat. Luettu: 21.10.2026.
+- Wikikirjasto. Radiotaajuuskirja/aallonpituus. Luettavissa: https://fi.wikibooks.org/wiki/Radiotaajuuskirja/aallonpituus. Luettu: 22.10.2026. 
 
