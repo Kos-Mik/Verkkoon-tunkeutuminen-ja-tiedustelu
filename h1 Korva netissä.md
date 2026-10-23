@@ -72,7 +72,7 @@ Radioähetyksen speksit:
 
 ## c) ADS-B
 
-Tässä tehtävässä on tarkoituksena etsiä ADS-B Exchange -palvelusta (https://globe.adsbexchange.com/) kiinnostava lentokone ja kuvailtava sitä sekä sen lentoa. Valitsin Finnairin AIRBUS A-350 -lentokoneen (rekisteri OH-LWE), joka juuri sopivasti lähti Etelä-Koreasta, Incheonin lentokentältä kohti Suomea. 
+Tässä tehtävässä on tarkoituksena etsiä ADS-B Exchange -palvelusta (https://globe.adsbexchange.com/) kiinnostava lentokone ja kuvailtava sitä sekä sen lentoa. Valitsin Finnairin AIRBUS A-350 -lentokoneen (rekisteri OH-LWE), joka juuri sopivasti lähti Etelä-Koreasta, Incheonin lentokentältä kohti Suomea. Olin vuonna 2017 opiskelijavaihdossa Soulissa, minkä vuoksi kiinnostuin juuri tästä lennosta ja sen nykyisestä reitistä. Tuolloin Finnairin Aasian-lennot lensivät vielä suoraan Venäjän ylitse, joten onkin mielenkiintoista nähdä, mitä reittiä Finnairin koneet nykyisin käyttävät päästäkseen kaukoidästä Suomeen ja toisin päin.
 
 Airbus A350-900 on pitkän matkan laajarunkokone, jota käytetään erityisesti mannertenvälisillä reiteillä. ADS-B Exchange -palvelun tietojen mukaan tarkastelemani koneen tyyppimerkintä on A359 ja sen toimintasäde on noin 7750 merimailia. Kone on lähes 67 metriä pitkä ja sen siipien kärkiväli on noin 65 metriä.
 
