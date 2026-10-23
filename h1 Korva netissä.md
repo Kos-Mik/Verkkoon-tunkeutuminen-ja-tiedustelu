@@ -70,10 +70,35 @@ Radioähetyksen speksit:
 - **Modulaatio**: FM
 - **Aallonpituus**: n. 49,5 m
 
+## c) ADS-B
+
+Tässä tehtävässä on tarkoituksena etsiä ADS-B Exchange -palvelusta (https://globe.adsbexchange.com/) kiinnostava lentokone ja kuvailtava sitä sekä sen lentoa. Valitsin Finnairin AIRBUS A-350 -lentokoneen (rekisteri OH-LWE), joka juuri sopivasti lähti Etelä-Koreasta, Incheonin lentokentältä kohti Suomea. 
+
+Airbus A350-900 on pitkän matkan laajarunkokone, jota käytetään erityisesti mannertenvälisillä reiteillä. ADS-B Exchange -palvelun tietojen mukaan tarkastelemani koneen tyyppimerkintä on A359 ja sen toimintasäde on noin 7750 merimailia. Kone on lähes 67 metriä pitkä ja sen siipien kärkiväli on noin 65 metriä.
+
+<p align="center">
+<img width="1916" height="901" alt="image" src="https://github.com/user-attachments/assets/8d16caeb-6fac-495d-ad26-e3272c63c481" />
+  
+  <br>
+  <em>Koneen lentorata</em>
+</p>
+
+Historiatiedoista näkyy myös, että sama kone on lentänyt viime päivinä Helsingin, Soulin, Tokion ja Bangkokin välisiä kaukoliikenteen reittejä. Mukana on myös yksi Lontoon reissu, mutta konetta käytetään selvästi eniten Finnairin Aasian lentoihin.
+
+<p align="center">
+<img width="1696" height="862" alt="image" src="https://github.com/user-attachments/assets/eccd15f1-f760-475b-931a-9c1fdfa28bf5" />
+  
+  <br>
+  <em>Lentohistoria</em>
+</p>
+
+ADS-B Exchange perustuu lentokoneiden lähettämiin ADS-B-signaaleihin. Lentokone lähettää jatkuvasti tietoa esim. sijainnistaan, korkeudestaan, nopeudestaan ja suunnastaan, ja nämä tiedot välitetään ADS-B Exchange -palveluun. Tämän ansiosta käyttäjä voi seurata koneen liikkeitä kartalla lähes reaaliajassa (sivuston mukaan tiedot voivat päivittyä jopa 500 ms välein) sekä tarkastella tarkempia lentotietoja, kuten aiemmista kuvakaappauksista voi nähdä. Suurissa matkustajakoneissa, kuten juuri Airbus A350:ssä, ADS-B Out -järjestelmä on osa eurooppalaisia ilmailuvaatimuksia, joten kyse ei ole pelkästään lentokonebongareiden iloksi lähetettävistä tiedoista (European Union Aviation Safety Agency, 2020).
+
 ## Lähteet
 
 - Bluetooth. Understanding Bluetooth range. Luettavissa: https://www.bluetooth.com/learn-about-bluetooth/key-attributes/range/. Luettu: 21.10.2026.
 - European Space Agency. 2019. Astrophysics. Luettavissa: https://sci.esa.int/web/astrophysics/-/35909-gamma-ray. Luettu: 21.10.2026.
+- European Union Aviation Safety Agency. 2020. Amendment to the Airspace Requirements on ADS-B and Mode S. Luettavissa: https://www.easa.europa.eu/en/newsroom-and-events/news/amendment-airspace-requirements-ads-b-and-mode-s. Luettu: 23.10.2026.
 - International Telecommunication Union. FM / TV Regional Frequency Assignment Plans. Luettavissa: https://www.itu.int/en/ITU-R/terrestrial/broadcast/Pages/FMTV.aspx. Luettu: 21.10.2026.
 - IPCisco.com. WLAN Frequency Bands. Luettavissa: https://ipcisco.com/lesson/wlan-frequency-bands/. Luettu: 21.10.2026.
 - Karvinen, T. 2026. Verkkoon tunkeutuminen ja tiedustelu. Luettavissa: https://terokarvinen.com/verkkoon-tunkeutuminen-ja-tiedustelu/. Luettu: 22.10.2026.
