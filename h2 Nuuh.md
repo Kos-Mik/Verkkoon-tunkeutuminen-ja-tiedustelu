@@ -104,6 +104,6 @@ C-tehtävässä esitellystä DNS-kaappauksesta voidaan tunnistaa TCP/IP-mallin k
 
 ## Lähteet
 
-- Geeksforgeeks.org. 2026. TCP/IP Model. Luettavissa: https://www.geeksforgeeks.org/computer-networks/tcp-ip-model/. Luettu 28.10.2026.
+- GeeksforGeeks.org. 2026. TCP/IP Model. Luettavissa: https://www.geeksforgeeks.org/computer-networks/tcp-ip-model/. Luettu 28.10.2026.
 - Karvinen, T. 2025. Network Interface Names on Linux. Luettavissa: https://terokarvinen.com/network-interface-linux/. Luettu 28.10.2026.
 - Karvinen, T. 2025. Wireshark - Getting Started. Luettavissa: https://terokarvinen.com/wireshark-getting-started/. Luettu 28.10.2026.
