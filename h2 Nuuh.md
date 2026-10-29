@@ -72,6 +72,8 @@ Tästä nähdään, että vaikka virtuaalikone on NAT-verkossa (10.0.2.15), DNS-
   <em>Quad9:n testisivu virtuaalikoneella, joka vahvistaa, että DNS-kyselyt välittyvät OPNsensen kautta Quad9-palvelulle</em>
 </p>
 
+Tämä siis lähinnä vain kuriositeettina, joka hieman ohittaa jo tehtävänannon, mutta joka on ainakin omasta mielestäni ihan mielenkiintoinen havainto.
+
 ## d) Oikeesti TCP/IP
 
 C-tehtävässä esitellystä DNS-kaappauksesta voidaan tunnistaa TCP/IP-mallin kaikki neljä kerrosta. **Sovelluskerroksella** toimii DNS, joka vastaa nimipalvelukyselyistä. **Kuljetuskerroksella** käytetään UDP-protokollaa, mikä näkyy lähde- ja kohdeportteina 47719 ja 53. **Verkkokerroksella** puolestaan näkyvät IPv4-osoitteet 10.0.2.15 ja 192.168.xx.xx, joiden avulla paketti reititetään verkossa. **Peruskerroksella** käytetään Ethernet II -kehystä, joka sisältää lähettäjän ja vastaanottajan MAC-osoitteet (GeeksforGeeks, 2026).
@@ -100,10 +102,58 @@ C-tehtävässä esitellystä DNS-kaappauksesta voidaan tunnistaa TCP/IP-mallin k
   <em>Peruskerros (Link Layer)</em>
 </p>
 
+## e) Mitäs tuli surffattua? 
 
+Tässä tehtävässä avataan surfing-secure.pcap-tiedosto Wiresharkilla ja tutkitaan pintapuolisesti, millainen kaappaus on kyseessä: 
+
+- Paketteja: 283 framea.
+- Kaappauksen kokonaiskesto: n. 7,5 sekuntia.
+- Protokollat: DNS, TCP, TLSv1.3, QUIC, ARP.
+- Sisäverkon laitteet: 192.168.122.7 ja 192.168.122.1.
+- Liikenne on suurilta osin salattua (TLS 1.3 ja QUIC), joten sisältöä ei voida lukea suoraan kaappauksesta (Checkpoint.com).
+
+<p align="center">
+<img width="1290" height="319" alt="image" src="https://github.com/user-attachments/assets/cc82cc4d-2ca0-4405-bae1-2d4ddd75b2ae" />
+  <br>
+  <em>Kaappauksen pakettien kokonaismäärä, käytetty aika, osa protokolleista ja toinen sisäverkon laite.</em>
+</p>
+
+## g) Minkä merkkinen verkkokortti käyttäjällä on?
+
+Peruskerrosta (Ethernet II) tutkimalla ei MAC-osoitteen perusteella pystytty suoraan varmistamaan verkkokortin valmistajaa, koska osoite on paikallisesti hallittu (locally administered), eikä moni netissä oleva MAC-osoitteiden tunnistuspalvelu tuntunut myöskään tunnistavan sitä. Googlettamalla kyseistä MAC-osoitetta löytyi GitHub-sivu, jossa mainittiin osoitteen etuliitteen (52:54:00) vastaavan QEMU-virtuaalikoneiden käyttämiä virtuaalisia verkkokortteja (ashee 2015). Myös ainakin yksi MAC-osoitteiden tunnistuspalvelu antoi saman tuloksen (ServerSide.com s.a.).
+
+<p align="center">
+<img width="1291" height="615" alt="image" src="https://github.com/user-attachments/assets/94e5a70b-ecf2-44d2-954a-b5fa2b1f933a" />
+  <br>
+  <em>MAC-osoite löytyy, mutta ei muita tunnistetietoja verkkokortista.</em>
+</p>
+
+## h) Millä weppipalvelimella käyttäjä on surffaillut?
+
+Kun kaappauksen suodattaa DNS-hakusanalla, saa DNS-kyselyiden perusteella melko hyvän käsityksen siitä, millä sivustoilla käyttäjä on vieraillut:
+
+- www.google.com
+- terokarvinen.com
+- kommenttero.terokarvinen.com
+- gc.zgo.at
+- goatcounter.com
+- terokarvinen.goatcounter.com
+
+<p align="center">
+<img width="1326" height="571" alt="image" src="https://github.com/user-attachments/assets/1648b595-6130-40fc-9d96-7afeaaad18e4" />
+  <br>
+  <em>DNS-suodatus</em>
+</p>
+
+Nopeasti vilkaistuna sana **goat** ja satunnaiset konsonantit sen ympärillä herättivät hieman epäilyksiä, kuten varmasti monilla muillakin 2000-luvun internetissä kasvaneilla. Tarkempi tarkastelu kuitenkin osoitti liikenteen liittyvän avoimen lähdekoodin GoatCounter-kävijäseurantapalveluun. 
+
+Vaikka varsinainen HTTPS-liikenne on TLS-salattua, yhteyksien kohteita voidaan päätellä DNS-kyselyistä sekä TLS Client Hello -paketeissa näkyvästä SNI-tiedosta. Kaappauksesta löytyvä SNI-arvo terokarvinen.com vahvistaa, että käyttäjä on muodostanut HTTPS-yhteyden kyseiseen palvelimeen. Havaintojen perusteella käyttäjä siis on ainakin vieraillut sivustolla terokarvinen.com, ja mahdollisesti käyttänyt Googlea sivulle päätymiseen.
 
 ## Lähteet
 
-- GeeksforGeeks.org. 2026. TCP/IP Model. Luettavissa: https://www.geeksforgeeks.org/computer-networks/tcp-ip-model/. Luettu 28.10.2026.
-- Karvinen, T. 2025. Network Interface Names on Linux. Luettavissa: https://terokarvinen.com/network-interface-linux/. Luettu 28.10.2026.
-- Karvinen, T. 2025. Wireshark - Getting Started. Luettavissa: https://terokarvinen.com/wireshark-getting-started/. Luettu 28.10.2026.
+- Checkpoint.com. s.a. How Does the QUIC Protocol Work? Luettavissa: https://www.checkpoint.com/cyber-hub/network-security/what-is-quic/. Luettu 29.10.2026.
+- GeeksforGeeks.org 2026. TCP/IP Model. Luettavissa: https://www.geeksforgeeks.org/computer-networks/tcp-ip-model/. Luettu 28.10.2026.
+- Karvinen, T 2025. Network Interface Names on Linux. Luettavissa: https://terokarvinen.com/network-interface-linux/. Luettu 28.10.2026.
+- Karvinen, T 2025. Wireshark - Getting Started. Luettavissa: https://terokarvinen.com/wireshark-getting-started/. Luettu 28.10.2026.
+- ashee 2015. GitHub: Common mac address prefix/oui. Luettavissa: https://gist.github.com/ashee/9241ab6281e6f4d1ef9b/. Luettu: 29.10.2026.
+- ServerSide.com. s.a. MAC Address Lookup. Luettavissa: https://serverside.com/tools/mac-address-lookup?mac=52:54:00. Luettu: 29.10.2026.
