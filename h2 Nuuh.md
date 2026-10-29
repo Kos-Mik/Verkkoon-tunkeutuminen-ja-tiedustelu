@@ -145,9 +145,31 @@ Kun kaappauksen suodattaa DNS-hakusanalla, saa DNS-kyselyiden perusteella melko 
   <em>DNS-suodatus</em>
 </p>
 
-Nopeasti vilkaistuna sana **goat** ja satunnaiset konsonantit sen ympärillä herättivät hieman epäilyksiä, kuten varmasti monilla muillakin 2000-luvun internetissä kasvaneilla. Tarkempi tarkastelu kuitenkin osoitti liikenteen liittyvän avoimen lähdekoodin GoatCounter-kävijäseurantapalveluun. 
+Nopeasti vilkaistuna sana **goat** ja satunnaiset konsonantit sen ympärillä herättivät hieman epäilyksiä, kuten varmasti monilla muillakin 2000-luvun internetissä kasvaneilla (jos et tiedä, hyvä niin. Ei ole sen arvoista). Tarkempi tarkastelu kuitenkin osoitti liikenteen liittyvän avoimen lähdekoodin GoatCounter-kävijäseurantapalveluun. 
 
 Vaikka varsinainen HTTPS-liikenne on TLS-salattua, yhteyksien kohteita voidaan päätellä DNS-kyselyistä sekä TLS Client Hello -paketeissa näkyvästä SNI-tiedosta. Kaappauksesta löytyvä SNI-arvo terokarvinen.com vahvistaa, että käyttäjä on muodostanut HTTPS-yhteyden kyseiseen palvelimeen. Havaintojen perusteella käyttäjä siis on ainakin vieraillut sivustolla terokarvinen.com, ja mahdollisesti käyttänyt Googlea sivulle päätymiseen.
+
+## i) Analyysi
+
+Nyt siepataan Wiresharkilla pieni määrä omaa verkkoliikennettä ja analysoidaan sitä. Testasin mitä tapahtuu pelkästään avaamalla Firefox-selaimen eikä mitään muuta. Pakettien määräksi pelkästään tästä tuli peräti 283 framea. 
+
+<p align="center">
+<img width="1302" height="686" alt="image" src="https://github.com/user-attachments/assets/37a14cbf-e00d-4313-9ab5-08eba2f0a95a" />
+  <br>
+  <em>Murto-osa siitä liikenteestä mitä pelkkä selaimen käynnistys sai aikaan.</em>
+</p>
+
+Tehtävänannon mukaisesti analysoidaan vain ensimmäisiä paketteja, koska liikennettä syntyy jo tässä vaiheessa paljon:
+
+- Ensimmäisenä tietokone lähetti **DNS**-kyselyn palomuurini DNS-palvelimelle **192.168.xx.xx**. Kyselyn tarkoituksena oli selvittää IP-osoite verkkotunnukselle **content-signature-2.cdn.mozilla.net**. Kysely tehtiin sekä **IPv4** (**A**) että **IPv6** -osoitteille (**AAAA**). DNS-palvelin palautti IPv4-osoitteeksi **34.149.226.178**.
+- Tämän jälkeen tietokone muodosti **TCP**-yhteyden kyseiseen palvelimeen porttiin **443**, jota käytetään **HTTPS**-liikenteeseen. Yhteys muodostettiin TCP:n kolmivaiheisella kättelyllä:
+  
+  - Tietokoneen lähettämä yhteyspyyntö palvelimelle: **SYN (57218 > 443)**
+  - Palvelin ilmoittaa, että pyyntö on vastaanotettu ja se on valmis yhdistämään: **SYN/ACK (443 > 57218)**
+  - Tietokone kuittaa palvelimen vastauksen: **ACK (57218 > 443)**
+  
+- Kun TCP-yhteys oli muodostettu, selain aloitti **TLS**-salauksen. Tämä näkyy paketteina kuten **Client Hello, Server Hello ja Certificate**. Sertifikaatin avulla selain varmistaa palvelimen aitouden ja muodostaa salatun yhteyden.
+- Lopuksi liikenteessä näkyy **Application Data** -paketteja, jotka sisältävät varsinaista salattua tietoa. Pakettien sisältöä ei voi tarkastella suoraan Wiresharkissa, koska liikenne on suojattu TLS-salauksella.
 
 ## Lähteet
 
