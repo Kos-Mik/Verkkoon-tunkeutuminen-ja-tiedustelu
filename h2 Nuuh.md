@@ -79,7 +79,7 @@ Kalissa Wireshark kuuluu jo valmiiksi esiasennettuihin sovelluksiin, joten tät�
 
 <br>
 
-Tästä nähdään, että vaikka virtuaalikone on NAT-verkossa (10.0.2.15), DNS-palvelimeksi on päätynyt sisäverkon palomuuri osoitteessa 192.168.xx.xx. Minulla on vanha Sophos XG115 -mallinen palomuuri, johon on asennettu avoimen lähdekoodin OPNsense-palomuuri- ja reititinalusta. Kaappauksesta näkyy, että DNS-kysely ei mennyt suoraan esim. Googlelle tai Cloudflarelle, vaan OPNsense vastasi siihen. Kali käyttää siis DNS-palvelimena suoraan OPNsensea. OPNsense puolestaan käyttää Quad9:ää upstream-palvelimena:
+Tästä nähdään, että vaikka virtuaalikone on NAT-verkossa (10.0.2.15), DNS-palvelimeksi on päätynyt sisäverkon palomuuri osoitteessa 192.168.xx.xx. Minulla on vanha Sophos XG115 -mallinen palomuuri, johon on asennettu avoimen lähdekoodin OPNsense-alusta. Kaappauksesta näkyy, että DNS-kysely ei mennyt suoraan esim. Googlelle tai Cloudflarelle, vaan OPNsense vastasi siihen. Kali käyttää siis DNS-palvelimena suoraan OPNsensea. OPNsense puolestaan käyttää Quad9:ää upstream-palvelimena:
 
 <p align="center">
 <img width="1077" height="658" alt="image" src="https://github.com/user-attachments/assets/2e88d0d5-dbd9-407b-a124-8e894afd0ad4" />
