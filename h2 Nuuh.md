@@ -12,6 +12,11 @@
 ### Wireshark - Getting Started
 
 - Wireshark on analysointityökalu, jolla voidaan kaapata ja tutkia verkkoliikenteen paketteja.
+- Wireshark voidaan asentaa Debian-pohjaiselle Linuxille komennoilla:
+```bash
+sudo apt-get update
+sudo apt-get install wireshark
+```
 - Suodattimilla (esim. **dns**, **http**, **tl**s, **tcp.port == 443**) voidaan rajata näkyviin vain haluttu liikenne.
 - Kaappaukset voidaan tallentaa **.pcap**-tiedostoiksi ja avata myöhemmin analysointia varten.
 - Ohjelma tarjoaa myös tilastoja ja yhteyksien tarkempaa analysointia.
