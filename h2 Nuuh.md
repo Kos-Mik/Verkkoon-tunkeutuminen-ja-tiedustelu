@@ -12,20 +12,21 @@
 ### Wireshark - Getting Started
 
 - Wireshark on analysointityökalu, jolla voidaan kaapata ja tutkia verkkoliikenteen paketteja.
-- Suodattimilla (esim. dns, http, tls, tcp.port == 443) voidaan rajata näkyviin vain haluttu liikenne.
-- Kaappaukset voidaan tallentaa .pcap-tiedostoiksi ja avata myöhemmin analysointia varten.
+- Suodattimilla (esim. **dns**, **http**, **tl**s, **tcp.port == 443**) voidaan rajata näkyviin vain haluttu liikenne.
+- Kaappaukset voidaan tallentaa **.pcap**-tiedostoiksi ja avata myöhemmin analysointia varten.
 - Ohjelma tarjoaa myös tilastoja ja yhteyksien tarkempaa analysointia.
 
 ### Network Interface Names on Linux
 
-- Linuxissa verkkorajapintojen nimet kuvaavat niiden tyyppiä ja sijaintia (esim. wlp4s0 = langaton verkko, enp1s0 = Ethernet, lo = localhost).
-- Modernissa Linuxissa nimet ovat kuvaavampia kuin vanhat nimet (eth0, wlan0 jne).
+- Linuxissa verkkorajapintojen nimet kuvaavat niiden tyyppiä ja sijaintia (esim. **wlp4s0** = langaton verkko, **enp1s0** = Ethernet, lo = localhost).
+- Modernissa Linuxissa nimet ovat kuvaavampia kuin vanhat nimet (**eth0**,** wlan0** jne).
 - Verkkorajapintoja voidaan tarkastella esimerkiksi **ip a**-komennolla.
 - Rajapintojen nimeämisen tarkoitus on tehdä laitteiden tunnistamisesta johdonmukaisempaa ja helpompaa.
 
 ## a) Linux
 
 Minulla on jo valmiiksi VirtualBoxille asennettu Kali Linux (2026.3), koska olen aiemmin suorittanut Teron ja Larin **Tunkeutumistestaus**- ja **Sovellusten hakkerointi** -kurssit, joilla tämä käyttis on ollut enemmän tai vähemmän välttämättömyys.
+
 Sitä ei siis ole tarvinnut asentaa tätä kurssia varten uudelleen.
 
 <p align="center">
