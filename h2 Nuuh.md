@@ -18,7 +18,7 @@
 
 ### Network Interface Names on Linux
 
-- Linuxissa verkkorajapintojen nimet kuvaavat niiden tyyppiä ja sijaintia (esim. **wlp4s0** = langaton verkko, **enp1s0** = Ethernet, lo = localhost).
+- Linuxissa verkkorajapintojen nimet kuvaavat niiden tyyppiä ja sijaintia (esim. **wlp4s0** = langaton verkko, **enp1s0** = Ethernet, **lo** = localhost).
 - Modernissa Linuxissa nimet ovat kuvaavampia kuin vanhat nimet (**eth0**, **wlan0** jne).
 - Verkkorajapintoja voidaan tarkastella esimerkiksi ```ip a```-komennolla.
 - Rajapintojen nimeämisen tarkoitus on tehdä laitteiden tunnistamisesta johdonmukaisempaa ja helpompaa.
