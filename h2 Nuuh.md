@@ -169,7 +169,7 @@ Vaikka varsinainen HTTPS-liikenne on TLS-salattua, yhteyksien kohteita voidaan p
 Nyt siepataan Wiresharkilla pieni määrä omaa verkkoliikennettä ja analysoidaan sitä. Testasin mitä liikennettä syntyy ainoastaan Firefox-selaimen avaamalla ilman, että lähtisin vielä edes nettisurffailemaan. Pakettien määräksi pelkästään tästä toimenpiteestä tuli peräti 283 framea. 
 
 <p align="center">
-<img width="1302" height="686" alt="image" src="https://github.com/user-attachments/assets/37a14cbf-e00d-4313-9ab5-08eba2f0a95a" />
+<img width="1302" height="686" alt="image" src="https://github.com/user-attachments/assets/44ecce47-df3c-4cc3-9c5a-d80675adf683" />
   <br>
   <em>Murto-osa siitä liikenteestä mitä pelkkä selaimen käynnistys sai aikaan.</em>
 </p>
