@@ -51,15 +51,24 @@ rtl_433 -r Converted_433.92M_2000k.cs8
 
 Analyysin kautta löytyi seuraavia tunnisteita:
 
-- **House Code / ID:** 8785315
+- **House Code/ID:** 8785315
 - **Channel:** 3
 - **Unit:** 3
 - **Command:** OFF
 - **Group Call:** No
 - **Group:** 0
 
-rtl_433 tunnisti signaalin KlikAanKlikUit-Switch-, Proove-Security- ja Nexa-Security-yhteensopivaksi laiteprotokollaksi. House Code / ID on kaikissa sama eli 8785315. Lähetettävä komento on OFF, joten tarkoituksena näyttäisi olevan laitteen sammuttaminen. Sama viesti esiintyy neljä kertaa tallenteessa, ne ovat sisällöltään identtisiä ja niiden väliset ajat ovat noin 80 ms, joten näin nopea ja tasavälinen toistuminen vaikuttaa todennäköisemmin laitteen ominaisuudelta kuin käyttäjän tekemiltä peräkkäisiltä painalluksilta.
+rtl_433 tunnisti signaalin **KlikAanKlikUit-Switch**-, **Proove-Security**- ja **Nexa-Security** -yhteensopivaksi laiteprotokollaksi. House Code/ID on kaikissa sama eli 8785315. Lähetettävä komento on OFF, joten tarkoituksena näyttäisi olevan laitteen sammuttaminen. Sama viesti esiintyy neljä kertaa tallenteessa, ne ovat sisällöltään identtisiä ja niiden väliset ajat ovat noin 80 ms, joten joko kyseessä on todella vikkeläsorminen ihminen tai sitten näin nopea ja tasavälinen toistuminen on todennäköisemmin laitteen ominaisuus.
+
+Laitetyyppiä ei voi analyysin perusteella täysin varmentaa, mutta epäilys on, että näytteessä analysoidaan kauko-ohjattavia pistorasioita. rtl_433 tunnisti signaalin Nexa-Security- ja KlikAanKlikUit-Switch-yhteensopivaksi. Nexa-tuotemerkin kauko-ohjattavia pistorasioita myydään Suomessa monissa elektroniikkaliikkeissä (itsellänikin on käytössä Nexan kauko-ohjattavat pistorasiat), kun taas KlikAanKlikUit on Nexan hollantilainen vastine, joka toimii samalla tavalla (Homey, 2018). 
+
+
+
+https://github.com/user-attachments/assets/696c258e-b8ef-45d9-baa5-0b9696e33075
 
 
 
 
+## Lähteet
+
+Homey 2018. Using Nexa devices with Homey. Luettavissa: https://homey.app/en-us/blog/using-nexa-devices-with-homey/. Luettu: 4.11.2026.
