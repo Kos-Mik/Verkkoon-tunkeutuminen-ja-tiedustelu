@@ -123,8 +123,7 @@ Ihan jo tiedoston nimen perusteella tallennus on tehty 12.4.2025 klo 11:38:05 ta
 
 <p align="center">
 <img width="1091" height="589" alt="image" src="https://github.com/user-attachments/assets/b43a974d-2e2f-4b13-96a2-f27573be0bcb" />
-<img width="1038" height="317" alt="image" src="https://github.com/user-attachments/assets/d4786847-3948-4aaf-8ece-5ce9a64b3660" />
-
+<img width="1038" height="317" alt="image" src="https://github.com/user-attachments/assets/e78f0ce5-7141-4470-b819-5f8581fa6381" />
   <br>
   <em>Lähetyspurskeet ja aikaleima</em>
 </p>
