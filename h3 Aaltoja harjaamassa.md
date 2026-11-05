@@ -117,9 +117,9 @@ Nyt asennetaan virtuaalikoneelle **URH** eli **Universal Radio Hacker**. **pipx*
 
 ## f) Yleiskuva
 
-Tarkoituksena tässä tehtävässä on tarkastella **1-on-on-on-HackRF-20250412_113805-433_912MHz-2MSps-2MHz.complex16s**-näytettä ja antaa siitä yleiskuvaus. Tehtävänannossa tarkennetaan vielä, että näytteessä on Nexan pistorasian kaukosäätimen valon 1 ON -nappia painettu kolmesti. 
+Tarkoituksena tässä tehtävässä on tarkastella **1-on-on-on-HackRF-20250412_113805-433_912MHz-2MSps-2MHz.complex16s**-näytettä ja antaa siitä yleiskuvaus. Tehtävänannossa tarkennetaan vielä, että näytteessä Nexan pistorasian kaukosäätimen valon 1 ON -nappia on painettu kolmesti. 
 
-Ihan jo tiedoston nimen perusteella tallennus on tehty 12.4.2025 klo 11:38:05 taajuudella 433,912 MHz ja näytteenottotaajuudella 2 MS/s. Kun URH:lla tarkastelee tiedostoa esim. **Signal view**n kautta, näkee selvästi kolme erillistä lähetyspursketta, jotka ainakin silmämääräisesti näyttävät samanlaisilta. Tämä vastaa tehtävänannon tietoa siitä, että kaukosäätimen nappia on painettu kolmesti. Yksittäisiä bittejä tutkimalla pystyy näkemään aikaleimat, ja viimeisen bitin kohdalla aikaleima on 5,37 sekuntia. Tuntematta paremmin URH:n toimintaa tässä vaiheessa, epäilisin tämän olevan tallenteen kokonaispituus.
+Ihan jo tiedoston nimen perusteella näkee, että tallennus on tehty 12.4.2025 klo 11:38:05 taajuudella 433,912 MHz ja näytteenottotaajuudella 2 MS/s. Kun URH:lla tarkastelee tiedostoa esim. **Signal view**n kautta, näkee selvästi kolme erillistä lähetyspursketta, jotka ainakin silmämääräisesti näyttävät samanlaisilta. Tämä vastaa tehtävänannon tietoa siitä, että kaukosäätimen nappia on painettu kolmesti. Yksittäisiä bittejä tutkimalla pystyy näkemään aikaleimat, ja viimeisen bitin kohdalla aikaleima on 5,37 sekuntia. Tuntematta paremmin URH:n toimintaa tässä vaiheessa, epäilisin tämän olevan tallenteen kokonaispituus.
 
 <p align="center">
 <img width="1091" height="589" alt="image" src="https://github.com/user-attachments/assets/b43a974d-2e2f-4b13-96a2-f27573be0bcb" />
