@@ -60,13 +60,49 @@ Analyysin kautta löytyi seuraavia tunnisteita:
 
 rtl_433 tunnisti signaalin **KlikAanKlikUit-Switch**-, **Proove-Security**- ja **Nexa-Security** -yhteensopivaksi laiteprotokollaksi. House Code/ID on kaikissa sama eli 8785315. Lähetettävä komento on OFF, joten tarkoituksena näyttäisi olevan laitteen sammuttaminen. Sama viesti esiintyy neljä kertaa tallenteessa, ne ovat sisällöltään identtisiä ja niiden väliset ajat ovat noin 80 ms, joten joko kyseessä on todella vikkeläsorminen ihminen tai sitten näin nopea ja tasavälinen toistuminen on todennäköisemmin laitteen ominaisuus.
 
-Laitetyyppiä ei voi analyysin perusteella täysin varmentaa, mutta epäilys on, että näytteessä analysoidaan kauko-ohjattavia pistorasioita. rtl_433 tunnisti signaalin Nexa-Security- ja KlikAanKlikUit-Switch-yhteensopivaksi. Nexa-tuotemerkin kauko-ohjattavia pistorasioita myydään Suomessa monissa elektroniikkaliikkeissä (itsellänikin on käytössä Nexan kauko-ohjattavat pistorasiat), kun taas KlikAanKlikUit on Nexan hollantilainen vastine, joka toimii samalla tavalla (Homey, 2018). 
+Laitetyyppiä ei voi analyysin perusteella täysin varmentaa, mutta epäilys on, että näytteessä analysoidaan kauko-ohjattavia pistorasioita. rtl_433 tunnisti signaalin Nexa-Security- ja KlikAanKlikUit-Switch-yhteensopivaksi. Nexa-tuotemerkin kauko-ohjattavia pistorasioita myydään Suomessa monissa elektroniikkaliikkeissä [(itsellänikin on käytössä Nexan kauko-ohjattavat pistorasiat)](https://youtu.be/LNihJGIleYU?t=1414), kun taas KlikAanKlikUit on Nexan hollantilainen vastine, joka toimii samalla tavalla (Homey, 2018). 
 
 
 
-https://github.com/user-attachments/assets/696c258e-b8ef-45d9-baa5-0b9696e33075
+## d) Too compex 16?
 
+Tällä kertaa tarkoituksena on ladata .complex16s-muotoinen tiedosto, muuntaa se rtl_433-yhteensopivaan muotoon ja analysoida sitä.
 
+Ensin siis ladataan tiedosto nimeltä **Recorded-HackRF-20250411_183354-433_92MHz-2MSps-2MHz.complex16s**, jonka jälkeen se muunnetaan uudelleen muotoon **tehtavaD_433.92M_2000k.cs8** ja avataan analysoitavaksi seuraavilla komennoilla:
+
+```bash
+wget https://terokarvinen.com/verkkoon-tunkeutuminen-ja-tiedustelu/samples/Recorded-HackRF-20250411_183354-433_92MHz-2MSps-2MHz.complex16s
+```
+```bash
+mv Recorded-HackRF-20250411_183354-433_92MHz-2MSps-2MHz.complex16s tehtavaD_433.92M_2000k.cs8
+```
+```bash
+rtl_433 -r tehtavaD_433.92M_2000k.cs8
+```
+
+<p align="center">
+<img width="853" height="556" alt="image" src="https://github.com/user-attachments/assets/f5dac503-999a-4ba1-af01-39d776d18370" />
+  <br>
+  <em>Heeeetkinen!</em>
+</p>
+
+Kun tiedoston muuntaminen oli tehty ja se oli avattu, analyysin tulos oli sama kuin edellisessä tehtävässä: signaali tunnistui KlikAanKlikUit-Switch-, Proove-Security- ja Nexa-Security-yhteensopivaksi, House Code / ID oli 8785315, komento OFF jne. Tässä kohtaa minua alkoi epäilyttää, että olisiko tehtävässä jokin jäynä tai bugi. Lähdin vertailemaan edellisen C-osion tehtävän tiedostoa ja nyt muunnettua tiedostoa keskenään:
+
+<p align="center">
+<img width="614" height="351" alt="image" src="https://github.com/user-attachments/assets/824dcc60-cf0d-4135-897f-375c57496cb2" />
+  <br>
+  <em>Samalta näyttää.</em>
+</p>
+
+En ollut vieläkään vakuuttunut, joten lähdin vielä vertailemaan tiedostojen SHA-256-tiivisteitä keskenään vain ollakseni varma:
+
+<p align="center">
+<img width="1043" height="212" alt="image" src="https://github.com/user-attachments/assets/8fcd07e9-c18c-4fce-aff4-5b882d8016fb" />
+  <br>
+  <em>Edelleenkin samalta näyttää.</em>
+</p>
+
+Pakko se on uskoa... tiedostot ovat sisällöltään täysin samat, vaikka niiden alkuperäiset nimet ja tallennusmuoto poikkeavat toisistaan. Tehtävä on siis suoritettu.
 
 
 ## Lähteet
