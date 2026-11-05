@@ -60,7 +60,7 @@ Analyysin kautta löytyi seuraavia tunnisteita:
 
 rtl_433 tunnisti signaalin **KlikAanKlikUit-Switch**-, **Proove-Security**- ja **Nexa-Security** -yhteensopivaksi laiteprotokollaksi. House Code/ID on kaikissa sama eli 8785315. Lähetettävä komento on OFF, joten tarkoituksena näyttäisi olevan laitteen sammuttaminen. Sama viesti esiintyy neljä kertaa tallenteessa, ne ovat sisällöltään identtisiä ja niiden väliset ajat ovat noin 80 ms, joten joko kyseessä on todella vikkeläsorminen ihminen tai sitten näin nopea ja tasavälinen toistuminen on todennäköisemmin laitteen ominaisuus.
 
-Laitetyyppiä ei voi analyysin perusteella täysin varmentaa, mutta epäilys on, että näytteessä analysoidaan kauko-ohjattavia pistorasioita. rtl_433 tunnisti signaalin Nexa-Security- ja KlikAanKlikUit-Switch-yhteensopivaksi. Nexa-tuotemerkin kauko-ohjattavia pistorasioita myydään Suomessa monissa elektroniikkaliikkeissä [(itsellänikin on käytössä Nexan kauko-ohjattavat pistorasiat)](https://youtu.be/LNihJGIleYU?t=1414), kun taas KlikAanKlikUit on Nexan hollantilainen vastine, joka toimii samalla tavalla (Homey, 2018). 
+Laitetyyppiä ei voi analyysin perusteella täysin varmentaa, mutta epäilys on, että näytteessä analysoidaan kauko-ohjattavia pistorasioita (tämä tosin varmistui myöhemmässä tehtävässä, mutta koska perisyntini on aina ollut tunkea kädet heti saveen sen sijaan, että luen tehtävänannot kokonaan ja huolella, en tätä tehtävää tehtäessä vielä tienny sitä). rtl_433 tunnisti signaalin Nexa-Security- ja KlikAanKlikUit-Switch-yhteensopivaksi. Nexa-tuotemerkin kauko-ohjattavia pistorasioita myydään Suomessa monissa elektroniikkaliikkeissä [(itsellänikin on käytössä Nexan kauko-ohjattavat pistorasiat)](https://youtu.be/LNihJGIleYU?t=1414), kun taas KlikAanKlikUit on Nexan hollantilainen vastine, joka toimii samalla tavalla (Homey, 2018). 
 
 
 
@@ -94,7 +94,7 @@ Kun tiedoston muuntaminen oli tehty ja se oli avattu, analyysin tulos oli sama k
   <em>Samalta näyttää.</em>
 </p>
 
-En ollut vieläkään vakuuttunut, joten lähdin vielä vertailemaan tiedostojen SHA-256-tiivisteitä keskenään vain ollakseni varma:
+Vaikka todisteet puhuvat puolestaan, en ollut vieläkään täysin vakuuttunut. Lähdin siis vertailemaan tiedostojen SHA-256-tiivisteitä keskenään vain ollakseni täysin varma asiasta:
 
 <p align="center">
 <img width="1043" height="212" alt="image" src="https://github.com/user-attachments/assets/8fcd07e9-c18c-4fce-aff4-5b882d8016fb" />
@@ -102,7 +102,35 @@ En ollut vieläkään vakuuttunut, joten lähdin vielä vertailemaan tiedostojen
   <em>Edelleenkin samalta näyttää.</em>
 </p>
 
-Pakko se on uskoa... tiedostot ovat sisällöltään täysin samat, vaikka niiden alkuperäiset nimet ja tallennusmuoto poikkeavat toisistaan. Tehtävä on siis suoritettu.
+Pakko se on uskoa... tiedostot ovat sisällöltään täysin identtiset, vaikka niiden alkuperäiset nimet ja tallennusmuoto poikkeavat toisistaan. Tehtävä on siis suoritettu.
+
+## d) Ultimate
+
+Nyt asennetaan virtuaalikoneelle **URH** eli **Universal Radio Hacker**. **pipx**-työkalu ja siihen tarvittavat säädöt olivat Kaliin jo valmiiksi asennettuina, joten tässä vaiheessa komennoksi riitti vain ```pipx install urh```, jonka jälkeen URH voitiin käynnistää:
+
+
+<p align="center">
+<img width="793" height="505" alt="image" src="https://github.com/user-attachments/assets/b59b7f77-c726-4e36-9b21-f42e9376cec2" />
+  <br>
+  <em>Käynnistetty URH</em>
+</p>
+
+## f) Yleiskuva
+
+Tarkoituksena tässä tehtävässä on tarkastella **1-on-on-on-HackRF-20250412_113805-433_912MHz-2MSps-2MHz.complex16s**-näytettä ja antaa siitä yleiskuvaus. Tehtävänannossa tarkennetaan vielä, että näytteessä on Nexan pistorasian kaukosäätimen valon 1 ON -nappia painettu kolmesti. 
+
+Ihan jo tiedoston nimen perusteella tallennus on tehty 12.4.2025 klo 11:38:05 taajuudella 433,912 MHz ja näytteenottotaajuudella 2 MS/s. Kun URH:lla tarkastelee tiedostoa esim. **Signal view**n kautta, näkee selvästi kolme erillistä lähetyspursketta, jotka ainakin silmämääräisesti näyttävät samanlaisilta. Tämä vastaa tehtävänannon tietoa siitä, että kaukosäätimen nappia on painettu kolmesti.
+
+<p align="center">
+<img width="1091" height="589" alt="image" src="https://github.com/user-attachments/assets/b43a974d-2e2f-4b13-96a2-f27573be0bcb" />
+  <br>
+  <em>Lähetyspurskeet</em>
+</p>
+
+
+
+## g) Bittistä
+
 
 
 ## Lähteet
