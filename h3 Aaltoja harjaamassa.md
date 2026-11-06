@@ -6,13 +6,18 @@
 - **Selain:** Firefox 153.4.0esr (64-bit).
 - **Virtualisointialusta:** Oracle VirtualBox Version 7.2.16
 
-
 ## x) Tiivistelmät
 
 ### Hubacek 2019
 
 
+
 ### Cornelius 2022
+
+- 433,92 MHz:n laitteet käyttävät usein ASK/OOK-modulaatiota.
+- Signaali näkyy pulsseina, joissa kantoaalto on välillä päällä ja välillä pois.
+- Bittien tunnistaminen perustuu pulssien ja taukojen pituuksien mittaamiseen.
+- Demoduloitu bittijono ei välttämättä ole vielä lopullinen data, vaan sitä voidaan joutua käsittelemään lisää.
 
 ### 
 
@@ -119,7 +124,7 @@ Nyt asennetaan virtuaalikoneelle **URH** eli **Universal Radio Hacker**. **pipx*
 
 Tarkoituksena tässä tehtävässä on tarkastella **1-on-on-on-HackRF-20250412_113805-433_912MHz-2MSps-2MHz.complex16s**-näytettä ja antaa siitä yleiskuvaus. Tehtävänannossa tarkennetaan vielä, että näytteessä Nexan pistorasian kaukosäätimen valon 1 ON -nappia on painettu kolmesti. 
 
-Ihan jo tiedoston nimen perusteella näkee, että tallennus on tehty 12.4.2025 klo 11:38:05 taajuudella 433,912 MHz ja näytteenottotaajuudella 2 MS/s. Kun URH:lla tarkastelee tiedostoa esim. **Signal view**n Spectrogramin kautta, näkee selvästi kolme erillistä lähetyspursketta, jotka ainakin silmämääräisesti näyttävät samanlaisilta. Tämä vastaa tehtävänannon tietoa siitä, että kaukosäätimen nappia on painettu kolmesti. Yksittäisiä bittejä tutkimalla pystyy näkemään aikaleimat, ja viimeisen bitin kohdalla aikaleima on 5,37 sekuntia. Tuntematta paremmin URH:n toimintaa tässä vaiheessa, epäilisin tämän olevan tallenteen kokonaispituus.
+Ihan jo tiedoston nimen perusteella näkee, että tallennus on tehty 12.4.2025 klo 11:38:05 taajuudella 433,912 MHz ja näytteenottotaajuudella 2 MS/s. Kun URH:lla tarkastelee tiedostoa esim. **Signal view**n **Spectrogram**in kautta, näkee selvästi kolme erillistä lähetyspursketta, jotka ainakin silmämääräisesti näyttävät samanlaisilta. Tämä vastaa tehtävänannon tietoa siitä, että kaukosäätimen nappia on painettu kolmesti. Yksittäisiä bittejä tutkimalla pystyy näkemään aikaleimat, ja viimeisen bitin kohdalla aikaleima on 5,37 sekuntia. Tuntematta paremmin URH:n toimintaa tässä vaiheessa, epäilisin tämän olevan tallenteen kokonaispituus.
 
 <p align="center">
 <img width="1091" height="589" alt="image" src="https://github.com/user-attachments/assets/b43a974d-2e2f-4b13-96a2-f27573be0bcb" />
@@ -131,15 +136,15 @@ Ihan jo tiedoston nimen perusteella näkee, että tallennus on tehty 12.4.2025 k
 
 ## g) Bittistä
 
-Tutkin signaalia URH:ssa saatavilla olevilla ASK-, FSK- ja PSK-modulaatioilla. ASK-modulaatiolla signaalista saatiin selkein raakabittijono, jossa näkyi toistuvia datapaketteja ja niiden välisiä taukoja. FSK- ja PSK-modulaatioilla tulokset eivät näyttäneet yhtä järkeviltä. Lisäksi I/Q-näkymässä signaali näkyi selvinä purskeina, joiden välissä oli taukoja ilman signaalia - eli tämä vaikuttaisi sopivan parhaiten ASK-modulaatioon (Wikipedia a.s). Näiden havaintojen perusteella arvioin siis oikean modulaation olevan ASK. Yhden raakabitin pituus on keskimäärin 500 µs eli 0,5 ms. 
+Nyt tehtävänantona on demoduloida signaali raakabiteiksi, pohtia mikä on oikea modulaatio ja löytää bitin pituus ajassa.
+
+Tutkin signaalia URH:ssa saatavilla olevilla **ASK**-, **FSK**- ja **PSK**-modulaatioilla. ASK-modulaatiolla signaalista saatiin selkein bittijono, jossa näkyi toistuvia datapaketteja ja niiden välisiä taukoja. FSK- ja PSK-modulaatioilla tulokset eivät näyttäneet yhtä järkeviltä. Lisäksi **I/Q**-näkymässä signaali näkyi selvinä purskeina, joiden välissä oli taukoja ilman signaalia - eli, kuten myös toisessa X tehtävän materiaalissa (Cornelius 2022) todettiin, tällainen vaikuttaisi sopivan parhaiten ASK-modulaatioon. Näiden havaintojen perusteella arvioin siis oikean modulaation olevan **ASK**. Yhden bitin pituus on keskimäärin noin 500 µs (0,5 ms) eli yhden sekunnin aikana ehtii kulkea suunnilleen 2000 bittiä.
 
 <p align="center">
 <img width="1089" height="593" alt="image" src="https://github.com/user-attachments/assets/793a6ac5-a8e8-4ddf-873f-682824821112" />
   <br>
-  <em>Yhden raakabitin pituus</em>
+  <em>Yhden bitin keskimääräinen pituus</em>
 </p>
-
-
 
 
 
@@ -147,4 +152,3 @@ Tutkin signaalia URH:ssa saatavilla olevilla ASK-, FSK- ja PSK-modulaatioilla. A
 
 - Homey 2018. Using Nexa devices with Homey. Luettavissa: https://homey.app/en-us/blog/using-nexa-devices-with-homey/. Luettu: 4.11.2026.
 - Karvinen, T 2026. Verkkoon tunkeutuminen ja tiedustelu. Luettavissa: https://terokarvinen.com/network-interface-linux/. Luettu 4.11.2026.
-- Wikipedia a.s. Amplitude-shift keying. Luettavissa: https://en.wikipedia.org/wiki/Amplitude-shift_keying. Luettu 6.11.2026.
