@@ -60,7 +60,7 @@ Analyysin kautta löytyi seuraavia tunnisteita:
 
 rtl_433 tunnisti signaalin **KlikAanKlikUit-Switch**-, **Proove-Security**- ja **Nexa-Security** -yhteensopivaksi laiteprotokollaksi. House Code/ID on kaikissa sama eli 8785315. Lähetettävä komento on OFF, joten tarkoituksena näyttäisi olevan laitteen sammuttaminen. Sama viesti esiintyy neljä kertaa tallenteessa, ne ovat sisällöltään identtisiä ja niiden väliset ajat ovat noin 80 ms, joten joko kyseessä on todella vikkeläsorminen ihminen tai sitten näin nopea ja tasavälinen toistuminen on todennäköisemmin laitteen ominaisuus.
 
-Laitetyyppiä ei voi analyysin perusteella täysin varmentaa, mutta epäilys on, että näytteessä analysoidaan kauko-ohjattavia pistorasioita (tämä tosin varmistui myöhemmässä tehtävässä, mutta koska perisyntini on aina ollut tunkea kädet heti saveen sen sijaan, että luen tehtävänannot kokonaan ja huolella, en tätä tehtävää tehtäessä vielä tienny sitä). rtl_433 tunnisti signaalin Nexa-Security- ja KlikAanKlikUit-Switch-yhteensopivaksi. Nexa-tuotemerkin kauko-ohjattavia pistorasioita myydään Suomessa monissa elektroniikkaliikkeissä [(itsellänikin on käytössä Nexan kauko-ohjattavat pistorasiat)](https://youtu.be/LNihJGIleYU?t=1414), kun taas KlikAanKlikUit on Nexan hollantilainen vastine, joka toimii samalla tavalla (Homey, 2018). 
+Laitetyyppiä ei voi analyysin perusteella täysin varmentaa, mutta epäilys on, että näytteessä analysoidaan kauko-ohjattavia pistorasioita (huom! Tämä varmistui myöhemmässä tehtävässä, mutta koska perisyntini on aina ollut tunkea kädet heti saveen sen sijaan, että luen tehtävänannot kokonaan ja huolella, en tätä tehtävää tehtäessä vielä tienny sitä). rtl_433 tunnisti signaalin Nexa-Security- ja KlikAanKlikUit-Switch-yhteensopivaksi. Nexa-tuotemerkin kauko-ohjattavia pistorasioita myydään Suomessa monissa elektroniikkaliikkeissä [(itsellänikin on käytössä Nexan kauko-ohjattavat pistorasiat)](https://youtu.be/LNihJGIleYU?t=1414), kun taas KlikAanKlikUit on Nexan hollantilainen vastine, joka toimii samalla tavalla (Homey, 2018). 
 
 
 
@@ -119,7 +119,7 @@ Nyt asennetaan virtuaalikoneelle **URH** eli **Universal Radio Hacker**. **pipx*
 
 Tarkoituksena tässä tehtävässä on tarkastella **1-on-on-on-HackRF-20250412_113805-433_912MHz-2MSps-2MHz.complex16s**-näytettä ja antaa siitä yleiskuvaus. Tehtävänannossa tarkennetaan vielä, että näytteessä Nexan pistorasian kaukosäätimen valon 1 ON -nappia on painettu kolmesti. 
 
-Ihan jo tiedoston nimen perusteella näkee, että tallennus on tehty 12.4.2025 klo 11:38:05 taajuudella 433,912 MHz ja näytteenottotaajuudella 2 MS/s. Kun URH:lla tarkastelee tiedostoa esim. **Signal view**n kautta, näkee selvästi kolme erillistä lähetyspursketta, jotka ainakin silmämääräisesti näyttävät samanlaisilta. Tämä vastaa tehtävänannon tietoa siitä, että kaukosäätimen nappia on painettu kolmesti. Yksittäisiä bittejä tutkimalla pystyy näkemään aikaleimat, ja viimeisen bitin kohdalla aikaleima on 5,37 sekuntia. Tuntematta paremmin URH:n toimintaa tässä vaiheessa, epäilisin tämän olevan tallenteen kokonaispituus.
+Ihan jo tiedoston nimen perusteella näkee, että tallennus on tehty 12.4.2025 klo 11:38:05 taajuudella 433,912 MHz ja näytteenottotaajuudella 2 MS/s. Kun URH:lla tarkastelee tiedostoa esim. **Signal view**n Spectrogramin kautta, näkee selvästi kolme erillistä lähetyspursketta, jotka ainakin silmämääräisesti näyttävät samanlaisilta. Tämä vastaa tehtävänannon tietoa siitä, että kaukosäätimen nappia on painettu kolmesti. Yksittäisiä bittejä tutkimalla pystyy näkemään aikaleimat, ja viimeisen bitin kohdalla aikaleima on 5,37 sekuntia. Tuntematta paremmin URH:n toimintaa tässä vaiheessa, epäilisin tämän olevan tallenteen kokonaispituus.
 
 <p align="center">
 <img width="1091" height="589" alt="image" src="https://github.com/user-attachments/assets/b43a974d-2e2f-4b13-96a2-f27573be0bcb" />
@@ -129,11 +129,22 @@ Ihan jo tiedoston nimen perusteella näkee, että tallennus on tehty 12.4.2025 k
 </p>
 
 
-
 ## g) Bittistä
+
+Tutkin signaalia URH:ssa saatavilla olevilla ASK-, FSK- ja PSK-modulaatioilla. ASK-modulaatiolla signaalista saatiin selkein raakabittijono, jossa näkyi toistuvia datapaketteja ja niiden välisiä taukoja. FSK- ja PSK-modulaatioilla tulokset eivät näyttäneet yhtä järkeviltä. Lisäksi I/Q-näkymässä signaali näkyi selvinä purskeina, joiden välissä oli taukoja ilman signaalia - eli tämä vaikuttaisi sopivan parhaiten ASK-modulaatioon (Wikipedia a.s). Näiden havaintojen perusteella arvioin siis oikean modulaation olevan ASK. Yhden raakabitin pituus on keskimäärin 500 µs eli 0,5 ms. 
+
+<p align="center">
+<img width="1089" height="593" alt="image" src="https://github.com/user-attachments/assets/793a6ac5-a8e8-4ddf-873f-682824821112" />
+  <br>
+  <em>Yhden raakabitin pituus</em>
+</p>
+
+
 
 
 
 ## Lähteet
 
-Homey 2018. Using Nexa devices with Homey. Luettavissa: https://homey.app/en-us/blog/using-nexa-devices-with-homey/. Luettu: 4.11.2026.
+- Homey 2018. Using Nexa devices with Homey. Luettavissa: https://homey.app/en-us/blog/using-nexa-devices-with-homey/. Luettu: 4.11.2026.
+- Karvinen, T 2026. Verkkoon tunkeutuminen ja tiedustelu. Luettavissa: https://terokarvinen.com/network-interface-linux/. Luettu 4.11.2026.
+- Wikipedia a.s. Amplitude-shift keying. Luettavissa: https://en.wikipedia.org/wiki/Amplitude-shift_keying. Luettu 6.11.2026.
