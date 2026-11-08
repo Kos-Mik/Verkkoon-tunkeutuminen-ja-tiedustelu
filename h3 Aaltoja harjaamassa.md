@@ -10,8 +10,9 @@
 
 ### Hubacek 2019
 
-- Universal Radio Hacker (URH) mahdollistaa signaalin tutkimiseen bitti kerrallaan.
-- Identtinen bittijono ja paketit ovat yleensä merkki, että demodulaatio on tehty oikein.
+- Universal Radio Hacker (URH) mahdollistaa signaalin tutkimisen ja purkamisen raakabittejä tunnistamalla.
+- SDR-vastaanottimen avulla voidaan tallentaa radiosignaaleja, joita voidaan taas analysoida URH:lla.
+- Identtinen bittijono ja paketit ovat yleensä merkki siitä, että demodulaatio on tehty oikein.
 - URH:n autodetect-ominaisuus on hyvä apu analyysiä tehtäessä, mutta ei kuitenkaan täydellinen. Onkin tarpeen toisinaan itse säädellä asetuksia.
 
 ### Cornelius 2022
