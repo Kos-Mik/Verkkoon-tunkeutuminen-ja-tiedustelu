@@ -16,6 +16,6 @@ RFID-urkinnalta en ole suojautunut niin hyvin kuin minulla olisi edellytyksiä. 
 Puhelimeni NFC-toiminto ei ole oletusarvoisesti päällä, koska en käytä puhelinta maksuvälineenä vähittäiskaupoissa, ja muutenkin käytän RFID-suojattua lompakkokoteloa. Avainnippu puolestaan on suojaamaton ja kulkee taskussa normaalisti muun tarpeellisen mukana. Tosin roskakuilun lätkää tai iLOQ-avainta en saanut skannattua millään testipuhelimen sovelluksella testattuani niitä nopeasti viime tunnilla.
 
 Sen sijaan työpaikan kulkulätkän tietoja oli helppo lukea puhelimen NFC Toolsilla, ja tuttavani, jolla on hallussaan Flipper Zero, näytti kuinka helposti sen myös pystyy kloonaamaan. Lätkää hallinnoi Abloy, joka on tarjonnut myös mahdollisuutta korvata kulkulätkän mobiilisovelluksella. Ongelmana on kuitenkin se, että ratkaisu perustuisi edelleen puhelimen NFC-toiminnon käyttöön, jota en normaalisti pidä päällä. Lisäksi joutuisin ottamaan puhelimeni pois RFID-suojatusta kotelosta aina sitä käyttäessäni.
-Minulle on myös tullut vastaan tietynlainen raja siinä, miten moneen eri paikkaan ja sovellukseen oikeasti haluan rekisteröityä, koska näihin laittamiani tietoja tullaan kuitenkin myymään eteen päin kolmansille osapuolille. Loppujen lopuksi näen helposti skannattavan kulkulätkän tässä tapauksessa pienempänä pahana.
+Minulle on myös tullut vastaan tietynlainen raja siinä, miten moneen eri paikkaan ja sovellukseen oikeasti haluan rekisteröityä, koska tietojani tullaan kuitenkin myymään eteen päin kolmansille osapuolille. Ja koska oven avaaminen lätkällä on muutenkin huomattavasti nopeampi toimenpide kuin puhelimella, niin loppujen lopuksi näen helposti skannattavan kulkulätkän käytön tässä tapauksessa pienempänä pahana.
 
-## b) rtl_433
+## b) 
