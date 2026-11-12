@@ -27,8 +27,10 @@ Komennossa on seuraavat peruskentät: **CLA** kertoo komentoluokan, **INS** vars
 
 Loppujen lopuksi melkoinen kuhina käy todella lyhyellä aikavälillä. RFID- tai NFC-tunnisteen lukeminen ei olekaan pelkkää skannaamista, vaan laitteen ja kortin välillä käydään melko tarkkaan määriteltyä keskustelua, jossa lukija lähettää erilaisia komentoja ja kortti päättää, mitä tietoja se palauttaa vastauksena.
 
+## c 
+
 
 ## Lähteet
 
-CardLogix s.a. Application Protocol Data Unit (APDU). Luettavissa: https://www.cardlogix.com/glossary/apdu-application-protocol-data-unit-smart-card/. Luettu 12.11.2026.
-Yubico s.a. APDUs. Luettavissa: https://docs.yubico.com/yesdk/users-manual/yubikey-reference/apdu.html. Luettu 11.11.2016.
+- CardLogix s.a. Application Protocol Data Unit (APDU). Luettavissa: https://www.cardlogix.com/glossary/apdu-application-protocol-data-unit-smart-card/. Luettu 12.11.2026.
+- Yubico s.a. APDUs. Luettavissa: https://docs.yubico.com/yesdk/users-manual/yubikey-reference/apdu.html. Luettu 11.11.2016.
