@@ -27,10 +27,17 @@ Komennossa on seuraavat peruskentät: **CLA** kertoo komentoluokan, **INS** vars
 
 Loppujen lopuksi melkoinen kuhina käy todella lyhyellä aikavälillä. RFID- tai NFC-tunnisteen lukeminen ei olekaan pelkkää skannaamista, vaan laitteen ja kortin välillä käydään melko tarkkaan määriteltyä keskustelua, jossa lukija lähettää erilaisia komentoja ja kortti päättää, mitä tietoja se palauttaa vastauksena.
 
-## c 
+## c) Kiintoisa RFID-hakkerointiuutinen
 
+RFID-hakkerointiin liittyvistä uutisista mielenkiintoisimpana pidin SecurityWeekin artikkelia, jossa kerrottiin miljoonia RFID-kortteja koskeneesta takaovesta. Quarkslabin tutkija Philippe Teuwen selvitti, että Shanghai Fudan Microelectronicsin valmistamissa MIFARE Classic -perheen RFID-korteissa oli tarkoituksellisesti lisätty toiminto, jonka avulla kortteja voitiin kloonata ilman varsinaisen suojauksen murtamista (Naraine, 2024).
+
+Tapauksesta tekee kiinnostavan se, ettei kyse ollut perinteisestä ohjelmointivirheestä tai huonosta salasanasta, vaan valmistajan lisäämästä takaovesta. Käytännössä kortin turvallisuus voitiin ohittaa huomattavasti helpommin kuin käyttäjät tai järjestelmän ylläpitäjät olivat luultavasti ajatelleet.
+
+Vaikka tämä on jo pari vuotta vanha uutinen, se on vaikuttanut sen verran laajasti, että se kiinnitti erityisesti huomioni. Kuten myös aiemmassa a-tehtävässä totesinkin, olin tunnilla kokeillut työpaikkani kulkulätkän skannaamista NFC Toolsilla ja nähnyt, kuinka helposti siitä sai luettua tietoja. Vaikka uutisessa käsitellyt kortit eivät välttämättä ole samoja kuin käyttämäni tunnisteet, tämä tapaus havainnollistaa mielestäni melko hyvin sitä, kuinka paljon RFID-järjestelmän turvallisuus riippuu myös kortin valmistajan ratkaisuista. Mielenkiintoisinta tässä tapauksessa onkin se, että joskus järjestelmän heikoin lenkki on se, että valmistaja on jättänyt laitteeseen takaoven jo alun perin. Tavallisena käyttäjänä on käytännössä mahdotonta tietää, onko omassa kulkulätkässä tai kortissa vastaavia ratkaisuja, joten RFID-tuotteiden todellinen turvallisuus ei välttämättä olekaan niin hyvä kuin voisi olettaa.
 
 ## Lähteet
 
 - CardLogix s.a. Application Protocol Data Unit (APDU). Luettavissa: https://www.cardlogix.com/glossary/apdu-application-protocol-data-unit-smart-card/. Luettu 12.11.2026.
+- Naraine, B. 2024. Major Backdoor in Millions of RFID Cards Allows Instant Cloning. Luettavissa: https://www.securityweek.com/major-backdoor-in-millions-of-rfid-cards-allows-instant-cloning/. Luettu 15.11.2016.
 - Yubico s.a. APDUs. Luettavissa: https://docs.yubico.com/yesdk/users-manual/yubikey-reference/apdu.html. Luettu 11.11.2016.
+  
