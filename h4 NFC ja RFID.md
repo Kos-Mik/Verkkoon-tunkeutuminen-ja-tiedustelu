@@ -29,7 +29,7 @@ Loppujen lopuksi melkoinen kuhina käy todella lyhyellä aikavälillä. RFID- ta
 
 ## c) Kiintoisa RFID-hakkerointiuutinen
 
-RFID-hakkerointiin liittyvistä uutisista mielenkiintoisimpana pidin **SecurityWeek**in artikkelia, jossa kerrottiin miljoonia RFID-kortteja koskeneesta takaovesta. Quarkslabin tutkija Philippe Teuwen selvitti, että Shanghai Fudan Microelectronicsin valmistamissa MIFARE Classic -perheen RFID-korteissa oli tarkoituksellisesti lisätty toiminto, jonka avulla kortteja voitiin kloonata ilman varsinaisen suojauksen murtamista (Naraine, 2024).
+Vaikka kyseessä ei olekaan perinteinen hakkerointitapaus, pidin mielenkiintoisena **SecurityWeek**in artikkelia, jossa kerrottiin miljoonia RFID-kortteja koskeneesta takaovesta. Quarkslabin tutkija Philippe Teuwen selvitti, että Shanghai Fudan Microelectronicsin valmistamissa MIFARE Classic -perheen RFID-korteissa oli tarkoituksellisesti lisätty toiminto, jonka avulla kortteja voitiin kloonata ilman varsinaisen suojauksen murtamista (Naraine, 2024).
 
 Tapauksesta tekee kiinnostavan se, ettei kyse ollut perinteisestä ohjelmointivirheestä tai huonosta salasanasta, vaan valmistajan lisäämästä takaovesta. Käytännössä kortin turvallisuus voitiin ohittaa huomattavasti helpommin kuin käyttäjät tai järjestelmän ylläpitäjät olivat luultavasti ajatelleet.
 
