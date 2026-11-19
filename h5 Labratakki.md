@@ -105,3 +105,174 @@ Lokitiedoista näkee suoraan, että hyökkääjä pystyi vastaanottamaan käytt�
 Wireshark-kaappauksessa havaittiin ensin ARP-myrkytyksen aiheuttamia väärennettyjä ARP-vastauksia, joissa hyökkääjän MAC-osoite (00:00:00:00:00:03) yhdistettiin IP-osoitteisiin 10.0.0.1 ja 10.0.0.2. Tämän jälkeen kaappauksessa näkyi SSH-yhteyden muodostuminen porttiin 22. SSH-protokollan tunnistetiedoista ilmeni, että palvelin vastasi tunnisteella "SSH-2.0-sshesame", mikä osoittaa yhteyden ohjautuneen hyökkääjän ylläpitämään valepalvelimeen eikä varsinaiselle kohdepalvelimelle h2. Tämä vahvistaa ARP-myrkytyksen onnistuneen.
 
 Yhteenvetona: tässä harjoituksessa onnistuttiin ohjaamaan h2:lle tarkoitettu SSH-liikenne hyökkääjäkoneelle ARP-myrkytyksen avulla. SSH:n avaintarkistus kuitenkin havaitsi muutoksen välittömästi ja varoitti käyttäjää mahdollisesta man-in-the-middle-hyökkäyksestä. Vasta käyttäjän hyväksyttyä uuden avaimen hyökkääjä pystyi vastaanottamaan käyttäjätunnuksen ja salasanan. Harjoitus havainnollistaa hyvin sitä, kuinka tehokas suoja SSH:n host key -tarkistus on silloin, kun käyttäjä kiinnittää siihen huomiota.
+
+## b)  ICMP Spoofing ja TCP Session Hijacking
+
+Tällä kertaa ei ollu niin selkää käsistystä mistä aloittaisin, joten oli pakko etsiä hakemistosta README.md-tiedosto:
+
+<details>
+<summary>Näytä README.md</summary>
+
+## ** Note **
+Ask teacher! Few of bugs are fixed only to local version.
+
+## **Introduction**
+
+This project is a hands-on exploration of network security attacks, illustrating the potential weaknesses in communication protocols and the methods attackers use to exploit these vulnerabilities. By providing scripts and instructions for each task, this repository serves as a learning resource for anyone interested in network security, ethical hacking, and cybersecurity.
+
+## **Project Overview**
+
+Each task in this repository simulates a different type of network attack. These exercises are conducted in a controlled environment using Mininet, a network emulator, and Python scripts. The primary objective is to analyze each attack and understand the techniques used, which can be beneficial in designing effective defense strategies in real-world scenarios.
+
+### **Tasks Overview**
+
+* **ICMP Spoofing Attack**: Simulates packet interception by spoofing ICMP echo requests and replies.  
+* **MITM Attack Using ARP Cache Poisoning**: Demonstrates interception of communication by manipulating the ARP cache.  
+* **TCP Session Hijacking Attack**: Explores session hijacking by injecting spoofed packets into an active TCP session.
+
+---
+
+## **Prerequisites**
+
+Before you begin, ensure you have the following tools and libraries installed:
+
+* **Python 3.x**: Python programming language.
+
+**Scapy library**: For packet manipulation and crafting.  
+```pip install scapy```
+
+* **Mininet**: Network emulator for creating virtual networks.  
+* **Virtual Machine (VM) environment** (recommended): To safely test network attacks without affecting live networks.
+
+---
+
+## **Installation**
+
+**Clone this repository** to your local machine:  
+```git clone https://github.com/yourusername/network-security-lab.git```  
+```cd network-security-lab```
+
+1. **Install dependencies**:
+
+Install Scapy (if not already installed): ```pip install scapy```
+
+2. **Set up Mininet**:  
+   * Follow the official Mininet installation guide if you haven't installed it already.
+
+---
+
+## **Tasks**
+
+### **Task 1: ICMP Spoofing Attack**
+
+In this task, you'll learn how to capture and spoof ICMP packets (e.g., ping requests and replies) between two hosts within a Mininet network. This demonstrates how attackers can intercept and alter network communications.
+
+**Files**:
+
+* ```sniff_icmp.py```: Script to capture ICMP packets.  
+* ```spoof_icmp.py```: Script to spoof ICMP echo replies.
+
+### **Task 2: MITM Attack Using ARP Cache Poisoning**
+
+This task demonstrates a **Man-in-the-Middle** attack by using ARP cache poisoning. By sending malicious ARP responses, an attacker can intercept and alter communications between two hosts.
+
+**Files**:
+
+* ```udp_server.py```: UDP server script to simulate normal traffic.  
+* ```udp_client.py```: UDP client script to simulate normal traffic.  
+* ```arp_poison.py```: Script to perform ARP cache poisoning.
+
+### **Task 3: TCP Session Hijacking Attack**
+
+This task explores TCP session hijacking, where an attacker takes over an active session between two hosts by injecting spoofed packets.
+
+**Files**:
+
+* ```tcp_server.py```: TCP server script to simulate a session.  
+* ```tcp_client.py```: TCP client script to simulate a session.  
+* ```sniff_tcp_session.py```: Script to capture TCP session details.  
+* ```tcp_hijack.py```: Script to perform TCP session hijacking by injecting spoofed packets.
+
+---
+
+## **Usage**
+
+Each task is designed to be run in a Mininet environment. Below are the steps to execute each task:
+
+**Set up the Mininet environment**:  
+```sudo python hub_topo.py```
+
+1. **Run the relevant scripts** on different Mininet hosts to perform each task.
+
+**Task 1: ICMP Spoofing**  
+`# On Host 1`  
+```python sniff_icmp.py```
+
+`# On Host 2`  
+```ping 10.0.0.1```
+
+**Task 2: ARP Cache Poisoning (MITM)**  
+`# On Host 1`  
+```python udp_server.py```
+
+`# On Host 2`  
+```python udp_client.py```
+
+`# On Host 3`  
+```python arp_poison.py```
+
+**Task 3: TCP Session Hijacking**  
+`# On Host 1`  
+```python tcp_server.py```
+
+`# On Host 2`  
+```python tcp_client.py```
+
+`# On Host 3`  
+```python sniff_tcp_session.py```  
+```python tcp_hijack.py```
+
+2. **Observe the output**: Each script will display output on the console, showing captured packets, spoofed replies, and other details based on the task.
+
+**Note**: Execute these commands within the Mininet environment to simulate real network conditions.
+
+---
+
+## **Contributing**
+
+Contributions to this repository are welcome. All contributions should follow best practices and include detailed comments and documentation.
+
+---
+
+## **License**
+
+This project is licensed under the MIT License. For more information, please refer to the LICENSE file.
+
+</details>
+
+Selkis! Aloitetaan siis **ICMP Spoofing** -tehtävästä. Mennään takaisin **scripts**-hakemistoon ```cd ~/lab/01-Network-Security-Lab/scripts``` ja käynnistetään topologia ```sudo python hub_topo.py```. Tämän jälkeen avataan terminaalit **h1**, **h2** ja **h3**.
+
+<p align="center">
+<img width="1184" height="732" alt="image" src="https://github.com/user-attachments/assets/a26e0a41-ece5-4da0-a8d5-489b5c95b516" />
+  <br>
+  <em>Nyt alkaa olla hieman ruuhkaa pienen virtuaalikoneen ruudulla</em>
+</p>
+
+- **h1** terminaalissa käynnistetään kuuntelu ```python sniff_icmp.py```
+- **h2**-terminaalissa lähetetään pingi ```ping 10.0.0.1```
+- **h3**-terminaalissa käynnistetään väärentäjä ```python spoof_icmp.py``` ja laitetaan myös Wireshark tutkimaan liikennettä varmuuden vuoksi ```wireshark &```:
+
+<p align="center">
+<img width="968" height="580" alt="image" src="https://github.com/user-attachments/assets/4e5f178c-fa99-46d8-95d0-6aa9484895e3" />
+<img width="956" height="737" alt="image" src="https://github.com/user-attachments/assets/d9128526-13a1-4914-97fb-b6619239c582" />
+  <br>
+  <em>Pingaus, spooffaus ja kaappaus</em>
+</p>
+
+Kesti jonkin aikaa oivaltaa, että mitä oikein tapahtui, kun spoofausohjelma käynnistettiin. Lopulta sekä h1-terminaalin kuunteluohjelmassa että Wireshark-kaappauksessa havaittiin hyökkäyksen käynnistymisen jälkeen ylimääräisiä ICMP Echo Reply -paketteja. Normaalien vastausten lisäksi verkkoon ilmestyi paketteja, joiden tunnisteet olivat poikkeavia (id=0x0000, seq=0/0). Näitä paketteja ei esiintynyt ennen spoofausohjelman käynnistämistä. Tämä siis osoittaa, että hyökkääjän spoof_icmp.py-skripti lähetti verkkoon väärennettyjä ICMP-vastauksia oikean palvelimen lähettämien vastausten rinnalle.
+
+
+
+
+
+
