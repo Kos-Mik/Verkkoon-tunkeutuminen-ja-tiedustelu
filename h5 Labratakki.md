@@ -269,15 +269,26 @@ Ping-liikenne jatkui kuitenkin näennäisesti normaalina, minkä vuoksi hyökkä
 
 <br>
 
-Seuraavaksi tehdään **TCP Session Hijacking** -labra. Tällä kertaa pysytään samassa hakemistossa kuin **ICMP Spoofing** -labrassakin ja pidetään sama topologia käynnissä. Avataan vain "puhtaat" **h1**, **h2** ja **h3** -terminaalit.
+Seuraavaksi tehdään **TCP Session Hijacking** -labra. Pysytään samassa hakemistossa kuin **ICMP Spoofing** -labrassakin ja pidetään sama myös topologia käynnissä. Avataan vain "puhtaat" **h1**, **h2** ja **h3** -terminaalit.
 
 - **h1**-terminaalissa ajetaan ```python tcp_server.py```, joka toimii TCP-palvelimena.
 - **h2**-terminaalissa ajetaan ```python tcp_client.py```, joka muodostaa yhteyden palvelimeen.
 - **h3**-terminaalissa käynnistetään ```python sniff_tcp_session.py```, joka kuuntelee verkossa kulkevaa TCP-liikennettä ja kerää tietoa aktiivisesta TCP-istunnosta.
-- Avataan vielä toinen h3-terminaali, koska aiemmassa h3-terminaalissa skripti jää kuuntelemaan liikennettä ja se pitää jättää käyntiin. Ajetaan tässä ```python tcp_hijack.py```, joka yrittää syöttää väärennettyjä paketteja aktiiviseen TCP-istuntoon.
+- Avataan vielä kaksi muuta h3-terminaalia, koska aiemmassa h3-terminaalissa skripti jää kuuntelemaan liikennettä ja se pitää jättää käyntiin. Käynnistetään toisessa jälleen Wireshark ja ajetaan toisessa ```python tcp_hijack.py```, joka yrittää syöttää väärennettyjä paketteja aktiiviseen TCP-istuntoon.
 
-- 
+<p align="center">
+<img width="968" height="704" alt="image" src="https://github.com/user-attachments/assets/9b1721ba-7614-4d59-8e61-e19138841834" />
+<img width="995" height="311" alt="image" src="https://github.com/user-attachments/assets/c23ef34b-7b44-495c-bfd5-a43f6e877f8e" />
+  <br>
+  <em></em>
+</p>
 
+Tämä harjoitus oli huomaamattomampi kuin ARP-myrkytys, sillä mitään yhtä selvää onnistumisen merkkiä ei tullut vastaan. Normaali yhteys h1:n ja h2:n välillä muodostui ilman ongelmia, minkä jälkeen h3 alkoi kuunnella yhteyttä ja kerätä siitä tietoja hyökkäystä varten.
 
+Itse hyökkäys näkyi lähinnä siinä, että tcp_hijack.py lähetti väärennetyn TCP-paketin esiintyen h2:na. Ilman Wiresharkia olisi ollut melko vaikea sanoa mitä oikeastaan tapahtui, sillä terminaaleissa ei näkynyt mitään yhtä ilmeistä kuin esimerkiksi ARP-myrkytyksen yhteydessä.
+
+Mielenkiintoisin havainto löytyi lopulta Wireshark-kaappauksesta, jossa näkyi hyökkäyksen jälkeen TCP Reset (RST, ACK) -paketti. Tämän perusteella hyökkääjän lähettämä paketti vaikutti aktiiviseen yhteyteen ja aiheutti häiriön sen toiminnassa. Harjoituksen perusteella TCP-istunnon kaappaaminen vaikutti myös selvästi monimutkaisemmalta kuin ICMP-spoofaus, koska ennen varsinaista hyökkäystä täytyi ensin kerätä tietoa olemassa olevasta yhteydestä. Hyökkäys siis onnistui vaikuttamaan yhteyteen, mutta sen vaikutukset olivat huomattavasti vaikeammin havaittavissa kuin aiemmissa harjoituksissa.
+
+## c) TCP SYN-Flood
 
 
