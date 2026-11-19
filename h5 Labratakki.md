@@ -250,13 +250,7 @@ This project is licensed under the MIT License. For more information, please ref
 
 </details>
 
-Selkis! Aloitetaan siis **ICMP Spoofing** -tehtävästä. Mennään takaisin **scripts**-hakemistoon ```cd ~/lab/01-Network-Security-Lab/scripts``` ja käynnistetään topologia ```sudo python hub_topo.py```. Tämän jälkeen avataan terminaalit **h1**, **h2** ja **h3**.
-
-<p align="center">
-<img width="1184" height="732" alt="image" src="https://github.com/user-attachments/assets/a26e0a41-ece5-4da0-a8d5-489b5c95b516" />
-  <br>
-  <em>Nyt alkaa olla hieman ruuhkaa pienen virtuaalikoneen ruudulla</em>
-</p>
+Selkis! Aloitetaan siis **ICMP Spoofing** -tehtävästä. Mennään **scripts**-hakemistoon ```cd ~/lab/01-Network-Security-Lab/scripts``` ja käynnistetään topologia ```sudo python hub_topo.py```. Tämän jälkeen avataan terminaalit **h1**, **h2** ja **h3**.
 
 - **h1** terminaalissa käynnistetään kuuntelu ```python sniff_icmp.py```
 - **h2**-terminaalissa lähetetään pingi ```ping 10.0.0.1```
@@ -269,8 +263,9 @@ Selkis! Aloitetaan siis **ICMP Spoofing** -tehtävästä. Mennään takaisin **s
   <em>Pingaus, spooffaus ja kaappaus</em>
 </p>
 
-Kesti jonkin aikaa oivaltaa, että mitä oikein tapahtui, kun spoofausohjelma käynnistettiin. Lopulta sekä h1-terminaalin kuunteluohjelmassa että Wireshark-kaappauksessa havaittiin hyökkäyksen käynnistymisen jälkeen ylimääräisiä ICMP Echo Reply -paketteja. Normaalien vastausten lisäksi verkkoon ilmestyi paketteja, joiden tunnisteet olivat poikkeavia (id=0x0000, seq=0/0). Näitä paketteja ei esiintynyt ennen spoofausohjelman käynnistämistä. Tämä siis osoittaa, että hyökkääjän spoof_icmp.py-skripti lähetti verkkoon väärennettyjä ICMP-vastauksia oikean palvelimen lähettämien vastausten rinnalle.
+Kesti jonkin aikaa oivaltaa, mitä spoofausohjelman käynnistämisen jälkeen oikeastaan tapahtui. Lopulta sekä h1-terminaalin kuunteluohjelmassa että Wireshark-kaappauksessa havaittiin hyökkäyksen käynnistymisen jälkeen ylimääräisiä ICMP Echo Reply -paketteja. Normaalien vastausten lisäksi verkkoon ilmestyi paketteja, joiden tunnisteet poikkesivat tavallisista vastauksista (**id=0x0000, seq=0/0**). Näitä paketteja ei esiintynyt ennen spoofausohjelman käynnistämistä. Tämä osoittaa, että hyökkääjän **spoof_icmp.py**-skripti lähetti verkkoon väärennettyjä ICMP-vastauksia oikean palvelimen lähettämien vastausten rinnalle.
 
+Ping-liikenne jatkui kuitenkin näennäisesti normaalina, minkä vuoksi hyökkäystä ei ollut helppo havaita pelkästään käyttäjän näkökulmasta. Kuten aiemmin mainitsin, itseltänikin kesti hetki ymmärtää, mikä kaappauksissa oli muuttunut. Harjoitus havainnollisti mielestäni hyvin, kuinka hyökkääjä voi tuottaa uskottavan näköisiä ICMP-vastauksia ilman, että ICMP-protokolla kykenee varmistamaan niiden todellista alkuperää. Samalla tuli hyvinkin selväksi, kuinka helposti myös ihminen voi tulkita väärennetyn liikenteen normaaliksi liikenteeksi, jos poikkeavuuksia ei osaa etsiä.
 
 
 
