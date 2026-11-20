@@ -12,7 +12,7 @@
 
 ## a) ARP hyökkäys
 
-Larin varoituksista huolimatta päätin käyttää kaikissa tehtävissä VirtualBoxia. Myös tekoälyä (Copilot, heh) on käytetty näissä tehtävissä tarkentamaan mitä mikin vaihe teoriassa tekee, koska tällä kertaa mennään hieman syvemmille vesille.
+Larin varoituksista huolimatta päätin käyttää kaikissa tehtävissä VirtualBoxia. Myös tekoälyä (Copilot, heh) on käytetty näissä tehtävissä tarkentamaan mitä mikin vaihe teoriassa tekee ja pääsemään yli vaikeimpien osioiden, koska tällä kertaa ollaan jo hieman syvemmissä vesissä.
 
 Mininet-virtuaalikoneessa ei ole graafista käyttöliittymää, joten laboratorioympäristöä hallittiin erillisestä Kali Linux -virtuaalikoneesta SSH-yhteyden avulla. Tätä varten molemmat virtuaalikoneet liitettiin samaan VirtualBoxin Host-Only-verkkoon ja Mininet-palvelimelle määritettiin IP-osoite 192.168.56.101.
 
@@ -295,13 +295,30 @@ Tällä kertaa ajetaan TCP SYN-Flood -hyökkäyssimulaatio. Simulaatio käynnist
   <em></em>
 </p>
 
-Topologia käynnistyi onnistuneesti, ja simulaation tulosteiden perusteella yksi hosteista määritettiin hyökkääjäksi samalla kun toinen hosti lähetti normaalia liikennettä. SDN-ohjain kuitenkin kaatui TensorFlow-kirjaston yhteensopivuusongelmaan **(tf.reset_default_graph())**, minkä vuoksi simulaatio ei edennyt täyteen toimintaan. En tiedä teinkö jotain väärin vai pitikö tämän ylipäätänsä mennäkin näin, mutta en itse keksi miten olisin voinut tehtävän toteuttaa toisinkaan. Ehkä ei olisi pitänytkään käyttää VirtualBoxia, vaikka alkuun näyttikin ihan hyvältä.
+Topologia käynnistyi onnistuneesti, ja simulaation tulosteiden perusteella yksi hosteista määritettiin hyökkääjäksi samalla kun toinen hosti lähetti normaalia liikennettä. SDN-ohjain kuitenkin kaatui TensorFlow-kirjaston yhteensopivuusongelmaan **(tf.reset_default_graph())**, minkä vuoksi simulaatio ei edennyt täyteen toimintaan. Tässä kohtaa oli pakko jälleen ottaa tekoäly hyötykäyttöön, että mikä meni pieleen: simulaatiossa havaittiin useita yhteensopivuusongelmia, koska projekti oli toteutettu **TensorFlow 1.x** -versiolle, kun laboratorioympäristössä oli käytössä **TensorFlow 2.13.1**. Ongelma ratkaistiin ottamalla käyttöön TensorFlown yhteensopivuuskerros **(tensorflow.compat.v1)** sekä päivittämällä vanhentuneita TensorFlow-kutsuja. 
 
 <p align="center">
-<img width="301" height="302" alt="suoritus" src="https://github.com/user-attachments/assets/8f340738-3265-4367-861b-06bf8a4b5198" />
+<img width="916" height="635" alt="image" src="https://github.com/user-attachments/assets/1370ca6b-8a31-4345-880b-ffe0ddf32711" />
+<img width="916" height="635" alt="image" src="https://github.com/user-attachments/assets/24a0a3c3-18aa-4094-ae5c-a0042cafe05f" />
+
+<img width="853" height="637" alt="image" src="https://github.com/user-attachments/assets/e40c014c-5394-442d-8863-4b864e263c84" />
+<img width="909" height="634" alt="image" src="https://github.com/user-attachments/assets/167056ae-9941-4cc4-b229-e40c3ae83c37" />
+
+  <br>
+  <em>Ennen ja jälkeen. Huom! Tässä on vain pari esimerkkiä. Korjattavia tiedostoja oli enemmänkin.</em>
+</p>
+
+Näiden muutosten jälkeen simulaatio käynnistyi onnistuneesti ja SDN-ohjain alkoi vastaanottaa verkkoliikenteen tietoja. Simulaation aikana Mininet-virtuaalikone alkoi antaa soft lockup -varoituksia useista prosessoriytimistä. Samalla myös oman koneeni tuuletin lähti huutamaan melkoisesti, joten nämä kyllä kertovat ympäristön kuormittuneen huomattavasti simulaation aikana. Tämä sopii hyvin yhteen SYN Flood -hyökkäyksen toimintaperiaatteen kanssa, jossa tavoitteena on kuluttaa kohteen resursseja mahdollisimman paljon.
+
+<p align="center">
+  <img width="801" height="681" alt="image" src="https://github.com/user-attachments/assets/206495b9-f833-4607-a859-9ea1c4b73daa" />
+  <img width="1383" height="533" alt="image" src="https://github.com/user-attachments/assets/21e37c89-2a80-4a34-862b-8f36b9c6aa21" />
   <br>
   <em></em>
 </p>
+
+SDN-ohjain vastaanotti jatkuvasti OpenFlow-tilastotietoja, mikä näkyi kasvavina packet_count-arvoina. Tästä huolimatta luokittelijan tuloste pysyi koko testin ajan arvoissa **Attack: 0** ja **Benign: 0**. Liikenteen seuranta vaikutti siis toimivan, mutta hyökkäysliikenteen tunnistamiseen tarkoitettu osa ei näyttänyt tuottavan tunnistustuloksia. Yhtenä mahdollisena syynä tähän voivat olla itse korjatut TensorFlow-yhteensopivuusongelmat tai projektin muu bugi.
+
 
 Näin siis TCP SYN Flood -hyökkäyksen pitäisi teoriassa toimia:
 
@@ -315,5 +332,6 @@ Hyökkäyksen tavoitteena ei ole päästä järjestelmään sisälle tai varasta
 
 ## Lähteet
 
-Cloudflare s.a. SYN flood attack. Luettavissa: https://www.cloudflare.com/learning/ddos/syn-flood-ddos-attack/. Luettu: 20.11.2026.
+- Cloudflare s.a. SYN flood attack. Luettavissa: https://www.cloudflare.com/learning/ddos/syn-flood-ddos-attack/. Luettu: 20.11.2026.
+- Microsoft Copilot
 
