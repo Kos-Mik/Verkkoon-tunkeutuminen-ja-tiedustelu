@@ -287,7 +287,7 @@ Mielenkiintoisin havainto löytyi lopulta Wireshark-kaappauksesta, jossa näkyi 
 
 ## c) TCP SYN-Flood
 
-Tällä kertaa ajetaan TCP SYN-Flood -hyökkäyssimulaatio. Simulaatio käynnistettiin projektin README-tiedoston ohjeiden mukaisesti. Ensin avattiin projektin hakemisto **02-SDN_DDoS_Simulation-tryout** ja käynnistettiin topologia komennolla ```sudo python tree_topology.py```. Tämän jälkeen käynnistettiin SDN-ohjain toisessa terminaalissa komennolla ```ryu-manager main.py```. 
+Tällä kertaa ajetaan TCP SYN-Flood -hyökkäyssimulaatio. Simulaatio käynnistettiin projektin README-tiedoston ohjeiden mukaisesti. Ensin avattiin projektin hakemisto **02-SDN_DDoS_Simulation-tryout** ja käynnistettiin **topologia** komennolla ```sudo python tree_topology.py```. Tämän jälkeen käynnistettiin **SDN-ohjain** toisessa terminaalissa komennolla ```ryu-manager main.py```. 
 
 <p align="center">
 <img width="679" height="532" alt="image" src="https://github.com/user-attachments/assets/a1db80ca-e49e-4635-84eb-41091f6c4982" />
@@ -295,7 +295,7 @@ Tällä kertaa ajetaan TCP SYN-Flood -hyökkäyssimulaatio. Simulaatio käynnist
   <em></em>
 </p>
 
-Topologia käynnistyi onnistuneesti, ja simulaation tulosteiden perusteella yksi hosteista määritettiin hyökkääjäksi samalla kun toinen hosti lähetti normaalia liikennettä. SDN-ohjain kuitenkin kaatui TensorFlow-kirjaston yhteensopivuusongelmaan **(tf.reset_default_graph())**, minkä vuoksi simulaatio ei edennyt täyteen toimintaan. Tässä kohtaa oli pakko jälleen ottaa tekoäly hyötykäyttöön, että mikä meni pieleen: simulaatiossa havaittiin useita yhteensopivuusongelmia, koska projekti oli toteutettu **TensorFlow 1.x** -versiolle, kun laboratorioympäristössä oli käytössä **TensorFlow 2.13.1**. Ongelma ratkaistiin ottamalla käyttöön TensorFlown yhteensopivuuskerros **(tensorflow.compat.v1)** sekä päivittämällä vanhentuneita TensorFlow-kutsuja. 
+Topologia käynnistyi onnistuneesti, ja simulaation tulosteiden perusteella yksi hosteista määritettiin hyökkääjäksi samalla kun toinen hosti lähetti normaalia liikennettä. SDN-ohjain kuitenkin kaatui TensorFlow-kirjaston yhteensopivuusongelmaan **(tf.reset_default_graph())**, minkä vuoksi simulaatio ei edennyt täyteen toimintaan. Tässä kohtaa oli pakko jälleen ottaa tekoäly hyötykäyttöön, että mikä meni pieleen: simulaatiossa havaittiin useita yhteensopivuusongelmia, koska projekti oli toteutettu **TensorFlow 1.x** -versiolle, kun laboratorioympäristössä oli käytössä **TensorFlow 2.13.1**. Ongelmaa korjattiin ottamalla käyttöön TensorFlown yhteensopivuustila **(tensorflow.compat.v1)** sekä vaihtamalla tiedostoissa **actor_network.py** ja **critic_network.py** käytetyt **tf.layers.Dense** -kutsut muotoon **tf.compat.v1.layers.Dense**. Lisäksi Mininetin vanhat verkkorajapinnat siivottiin komennolla ```sudo mn -c```, jotta topologia saataisiin käynnistettyä uudelleen.
 
 <p align="center">
 <img width="916" height="635" alt="image" src="https://github.com/user-attachments/assets/1370ca6b-8a31-4345-880b-ffe0ddf32711" />
