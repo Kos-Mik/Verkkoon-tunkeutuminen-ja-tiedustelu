@@ -12,15 +12,11 @@
 
 ## a) ARP hyökkäys
 
-Larin varoituksista huolimatta päätin käyttää tässä tehtävässä VirtualBoxia.
+Larin varoituksista huolimatta päätin käyttää kaikissa tehtävissä VirtualBoxia. Myös tekoälyä (Copilot, heh) on käytetty näissä tehtävissä tarkentamaan mitä mikin vaihe teoriassa tekee, koska tällä kertaa mennään hieman syvemmille vesille.
 
 Mininet-virtuaalikoneessa ei ole graafista käyttöliittymää, joten laboratorioympäristöä hallittiin erillisestä Kali Linux -virtuaalikoneesta SSH-yhteyden avulla. Tätä varten molemmat virtuaalikoneet liitettiin samaan VirtualBoxin Host-Only-verkkoon ja Mininet-palvelimelle määritettiin IP-osoite 192.168.56.101.
 
-Yhteys muodostettiin komennolla:
-
-```bash
-ssh -X mininet@192.168.56.101
-```
+Yhteys muodostettiin komennolla ```ssh -X mininet@192.168.56.101```.
 
 <p align="center">
 <img width="657" height="499" alt="image" src="https://github.com/user-attachments/assets/b4688475-88c3-4cf1-8c21-056d8375397e" />
@@ -291,4 +287,33 @@ Mielenkiintoisin havainto löytyi lopulta Wireshark-kaappauksesta, jossa näkyi 
 
 ## c) TCP SYN-Flood
 
+Tällä kertaa ajetaan TCP SYN-Flood -hyökkäyssimulaatio. Simulaatio käynnistettiin projektin README-tiedoston ohjeiden mukaisesti. Ensin avattiin projektin hakemisto **02-SDN_DDoS_Simulation-tryout** ja käynnistettiin topologia komennolla ```sudo python tree_topology.py```. Tämän jälkeen käynnistettiin SDN-ohjain toisessa terminaalissa komennolla ```ryu-manager main.py```. 
+
+<p align="center">
+<img width="679" height="532" alt="image" src="https://github.com/user-attachments/assets/a1db80ca-e49e-4635-84eb-41091f6c4982" />
+  <br>
+  <em></em>
+</p>
+
+Topologia käynnistyi onnistuneesti, ja simulaation tulosteiden perusteella yksi hosteista määritettiin hyökkääjäksi samalla kun toinen hosti lähetti normaalia liikennettä. SDN-ohjain kuitenkin kaatui TensorFlow-kirjaston yhteensopivuusongelmaan **(tf.reset_default_graph())**, minkä vuoksi simulaatio ei edennyt täyteen toimintaan. En tiedä teinkö jotain väärin vai pitikö tämän ylipäätänsä mennäkin näin, mutta en itse keksi miten olisin voinut tehtävän toteuttaa toisinkaan. Ehkä ei olisi pitänytkään käyttää VirtualBoxia, vaikka alkuun näyttikin ihan hyvältä.
+
+<p align="center">
+<img width="301" height="302" alt="suoritus" src="https://github.com/user-attachments/assets/8f340738-3265-4367-861b-06bf8a4b5198" />
+  <br>
+  <em></em>
+</p>
+
+Näin siis TCP SYN Flood -hyökkäyksen pitäisi teoriassa toimia:
+
+TCP SYN Flood -hyökkäys perustuu TCP-yhteyden muodostamiseen käytettävään kolmivaiheiseen kättelyyn. Normaalisti asiakas lähettää ensin **SYN**-paketin, johon palvelin vastaa **SYN-ACK**-paketilla. Tämän jälkeen asiakas vielä vahvistaa yhteyden **ACK**-paketilla, jolloin yhteys muodostuu onnistuneesti.
+
+TCP SYN Flood -hyökkäyksessä tarkoituksena on kuitenkin lähettää suuri määrä **SYN**-paketteja ilman, että yhteyksiä koskaan viimeistellään. Palvelin käsittelee jokaisen pyynnön normaalisti ja varaa niille resursseja odottaessaan viimeistä **ACK**-pakettia. Kun uusia yhteyspyyntöjä tulee jatkuvasti lisää eikä vanhoja saada päätökseen, palvelimelle alkaa kertyä suuri määrä keskeneräisiä yhteyksiä (Cloudflare, s.a).
+
+Nyt tehdyssä simulaatiossa hyökkäävä hosti vaihtui automaattisesti episodien välillä. Tulosteiden perusteella esimerkiksi **host4**, **host6** ja **host3** toimivat vuorollaan hyökkääjinä samalla kun jokin toinen hosti lähetti normaalia liikennettä. Tarkoituksena oli mallintaa tilannetta, jossa osa verkon liikenteestä on normaalia ja osa hyökkäysliikennettä.
+
+Hyökkäyksen tavoitteena ei ole päästä järjestelmään sisälle tai varastaa tietoa, vaan kuluttaa kohdejärjestelmän resursseja niin paljon, että normaalien käyttäjien yhteydet hidastuvat tai estyvät kokonaan. Cloudflaren kuvauksen perusteella hyökkäystä voidaan tehostaa käyttämällä väärennettyjä lähdeosoitteita, jolloin palvelin jää odottamaan vastauksia yhteyksiltä, joita ei todellisuudessa ole olemassa. Tämä kasvattaa keskeneräisten yhteyksien määrää entisestään ja lisää palvelimen kuormitusta.
+
+## Lähteet
+
+Cloudflare s.a. SYN flood attack. Luettavissa: https://www.cloudflare.com/learning/ddos/syn-flood-ddos-attack/. Luettu: 20.11.2026.
 
