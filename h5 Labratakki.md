@@ -317,7 +317,7 @@ Näiden muutosten jälkeen simulaatio käynnistyi onnistuneesti ja SDN-ohjain al
   <em></em>
 </p>
 
-SDN-ohjain vastaanotti jatkuvasti OpenFlow-tilastotietoja, mikä näkyi kasvavina packet_count-arvoina. Tästä huolimatta luokittelijan tuloste pysyi koko testin ajan arvoissa **Attack: 0** ja **Benign: 0**. Liikenteen seuranta vaikutti siis toimivan, mutta hyökkäysliikenteen tunnistamiseen tarkoitettu osa ei näyttänyt tuottavan tunnistustuloksia. Yhtenä mahdollisena syynä tähän voivat olla itse korjatut TensorFlow-yhteensopivuusongelmat tai projektin muu bugi.
+SDN-ohjain vastaanotti jatkuvasti OpenFlow-tilastotietoja, mikä näkyi kasvavina packet_count-arvoina. Tästä huolimatta luokittelijan tuloste pysyi koko testin ajan arvoissa **Attack: 0** ja **Benign: 0**. Liikenteen seuranta vaikutti siis toimivan, mutta hyökkäysliikenteen tunnistamiseen tarkoitettu osa ei näyttänyt tuottavan tunnistustuloksia. Yhtenä mahdollisena syynä tähän voivat olla itse korjatut TensorFlow-yhteensopivuusongelmat tai projektin muu bugi. Voi olla mahdollista, että koko tämän tehtävän ongelma oli itse aiheutettu, koska käytin tosiaan VirtualBoxia suositellun VMwaren sijaan. En välttämättä sanoisi, että kovin iso mahdollisuus, mutta mikään tällä alalla ei kuitenkaan ole mahdotonta. 
 
 
 Näin siis TCP SYN Flood -hyökkäyksen pitäisi teoriassa toimia:
