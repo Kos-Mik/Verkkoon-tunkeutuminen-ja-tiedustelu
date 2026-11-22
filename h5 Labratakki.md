@@ -98,7 +98,7 @@ Lokitiedoista näkee suoraan, että hyökkääjä pystyi vastaanottamaan käytt�
   <em>Osittainen Wireshark-kaappaus</em>
 </p>
 
-Wireshark-kaappauksessa havaittiin ensin ARP-myrkytyksen aiheuttamia väärennettyjä ARP-vastauksia, joissa hyökkääjän MAC-osoite (00:00:00:00:00:03) yhdistettiin IP-osoitteisiin 10.0.0.1 ja 10.0.0.2. Tämän jälkeen kaappauksessa näkyi SSH-yhteyden muodostuminen porttiin 22. SSH-protokollan tunnistetiedoista ilmeni, että palvelin vastasi tunnisteella "SSH-2.0-sshesame", mikä osoittaa yhteyden ohjautuneen hyökkääjän ylläpitämään valepalvelimeen eikä varsinaiselle kohdepalvelimelle h2. Tämä vahvistaa ARP-myrkytyksen onnistuneen.
+Wireshark-kaappauksessa havaittiin ensin ARP-myrkytyksen aiheuttamia väärennettyjä ARP-vastauksia, joissa hyökkääjän MAC-osoite (**00:00:00:00:00:03**) yhdistettiin IP-osoitteisiin **10.0.0.1** ja **10.0.0.2**. Tämän jälkeen kaappauksessa näkyi SSH-yhteyden muodostuminen porttiin **22**. SSH-protokollan tunnistetiedoista ilmeni, että palvelin vastasi tunnisteella "**SSH-2.0-sshesame**", mikä osoittaa yhteyden ohjautuneen hyökkääjän ylläpitämään valepalvelimeen eikä varsinaiselle kohdepalvelimelle h2. Tämä vahvistaa ARP-myrkytyksen onnistuneen.
 
 Yhteenvetona: tässä harjoituksessa onnistuttiin ohjaamaan h2:lle tarkoitettu SSH-liikenne hyökkääjäkoneelle ARP-myrkytyksen avulla. SSH:n avaintarkistus kuitenkin havaitsi muutoksen välittömästi ja varoitti käyttäjää mahdollisesta man-in-the-middle-hyökkäyksestä. Vasta käyttäjän hyväksyttyä uuden avaimen hyökkääjä pystyi vastaanottamaan käyttäjätunnuksen ja salasanan. Harjoitus havainnollistaa hyvin sitä, kuinka tehokas suoja SSH:n host key -tarkistus on silloin, kun käyttäjä kiinnittää siihen huomiota.
 
