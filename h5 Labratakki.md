@@ -298,7 +298,7 @@ Tällä kertaa ajetaan TCP SYN-Flood -hyökkäyssimulaatio. Simulaatio käynnist
 Topologia käynnistyi onnistuneesti, ja simulaation tulosteiden perusteella yksi hosteista määritettiin hyökkääjäksi samalla kun toinen hosti lähetti normaalia liikennettä. SDN-ohjain kuitenkin kaatui TensorFlow-kirjaston yhteensopivuusongelmaan **(tf.reset_default_graph())**, minkä vuoksi simulaatio ei edennyt täyteen toimintaan. Tässä kohtaa oli pakko jälleen ottaa tekoäly hyötykäyttöön, että mikä meni pieleen: simulaatiossa havaittiin useita yhteensopivuusongelmia, koska projekti oli toteutettu **TensorFlow 1.x** -versiolle, kun laboratorioympäristössä oli käytössä **TensorFlow 2.13.1**. Ongelmaa korjattiin ottamalla käyttöön TensorFlown yhteensopivuustila **(tensorflow.compat.v1)** sekä vaihtamalla tiedostoissa **actor_network.py** ja **critic_network.py** käytetyt **tf.layers.Dense** -kutsut muotoon **tf.compat.v1.layers.Dense**. Lisäksi Mininetin vanhat verkkorajapinnat siivottiin komennolla ```sudo mn -c```, jotta topologia saataisiin käynnistettyä uudelleen.
 
 <p align="center">
-<img width="916" height="635" alt="image" src="https://github.com/user-attachments/assets/1370ca6b-8a31-4345-880b-ffe0ddf32711" />
+<img width="913" height="636" alt="image" src="https://github.com/user-attachments/assets/7c5a5f30-9fb9-420f-8195-d708f94c030f" />
 <img width="916" height="635" alt="image" src="https://github.com/user-attachments/assets/24a0a3c3-18aa-4094-ae5c-a0042cafe05f" />
 
 <img width="853" height="637" alt="image" src="https://github.com/user-attachments/assets/e40c014c-5394-442d-8863-4b864e263c84" />
