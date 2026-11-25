@@ -26,7 +26,7 @@ cat /root/flag.txt
 
 <details>
 <summary>Katso vastaus</summary>
-  
+  <br>
 **flag{2162ae75cdefc5f731dfed4efa8b92743d1fb556}**
 
 <p align="center">
