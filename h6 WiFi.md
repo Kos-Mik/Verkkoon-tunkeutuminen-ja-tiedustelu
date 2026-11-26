@@ -194,7 +194,7 @@ sudo mdk4 wlan70 p \
 <p align="center">
 <img width="574" height="234" alt="image" src="https://github.com/user-attachments/assets/72f90938-6bab-4250-9520-6a5df994e66c" />
   <br>
-  <em>Ei ole wifi-love eikä wifi-butt, mutta.../em>
+  <em>Ei ole wifi-love eikä wifi-butt, mutta...</em>
 </p>
 
 Oikea vastaus on siis **wifi-free**. Sinänsä melko johdonmukaista, kun kyseessä oli myös avoin verkko. Tosin wifi-butt on sellainen SSID, jonka otan itselleni talteen tulevaisuutta ajatellen...
