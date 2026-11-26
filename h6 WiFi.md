@@ -137,3 +137,66 @@ grep "78:C1:A7:BF:72:46" capture-01.csv
 
 
 </details>
+
+#### 04. What is the ESSID of the hidden AP (mac F0:9F:C2:6A:88:26)?
+
+Tällä kertaa tulikin hieman hankalampi tapaus, joten oli pakko käyttää vihjeitä: 
+
+<details>
+<summary><b>Katso vihjeet</b></summary>
+
+<br>
+
+```bash
+There are no clients. Brute force!
+```
+```bash
+Bruteforce the ESSID using rockyou.txt with some modification
+```
+```bash
+mdk4
+```
+</details>
+
+Aiempien tehtävien airodumpista näkee, että kyseisen MAC-osoitteen omaava ESSID on 9 merkin pituinen.
+
+<p align="center">
+<img width="812" height="322" alt="image" src="https://github.com/user-attachments/assets/1647ead8-d939-4619-8470-d1d09f570046" />
+  <br>
+  <em>9 merkin pituinen ESSID</em>
+</p>
+
+Vihjeen perusteella ladataan siis **rockyou.txt**-tiedosto:
+
+```bash
+wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
+```
+
+Huomasin myös, että iso osa ESSID:stä alkaa wifi-alkuisesti. Muutin siis rockyou.txt-tiedostoa niin, että jokaisen sanan eteen tulee wifi-alkuliite, ja koska rockyoussa on yhteensä tällä hetkellä **14344391** sanaa, on järkevää trimmata sanojen määrää alkuliitemuunnoksen jälkeen vielä niin, että merkkejä on yhteensä 9 (eli **wifi-** + **4** merkkiä).
+
+```bash
+sed 's/^/wifi-/' rockyou.txt > wifi-rockyou.txt
+```
+```bash
+awk 'length($0)==4 {print "wifi-"$0}' rockyou.txt > wifi4.txt
+```
+
+Nyt saatiin sanojen määrää karsittua 17899 kappaleeseen.
+
+Tämän jälkeen käytetään **mdk4**-työkalua yhdessä uuden wifi4.txt-sanalistan kanssa:
+
+```bash
+sudo mdk4 wlan70 p \
+  -t F0:9F:C2:6A:88:26 \
+  -f wifi4.txt
+```
+
+<p align="center">
+<img width="574" height="234" alt="image" src="https://github.com/user-attachments/assets/72f90938-6bab-4250-9520-6a5df994e66c" />
+  <br>
+  <em>Ei ole wifi-love eikä wifi-butt, mutta.../em>
+</p>
+
+Oikea vastaus on siis **wifi-free**. Sinänsä melko johdonmukaista, kun kyseessä oli myös avoin verkko. Tosin wifi-butt on sellainen SSID, jonka otan itselleni talteen tulevaisuutta ajatellen...
+
+
