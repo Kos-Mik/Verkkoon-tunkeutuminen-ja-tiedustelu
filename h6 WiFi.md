@@ -11,6 +11,8 @@
 
 ## a) Tehtävät
 
+### Introduction
+
 Aloitetaan lineaarisesti WiFiChallenge Labin **Introduction**-osion lämmittelykierroksella:
 
 #### 00. What is the content of the file /root/flag.txt on the VM?
@@ -40,7 +42,9 @@ cat /root/flag.txt
 
 </details>
 
-Seuraavaksi voidaan jatkaa **Recon**-osion tehtäviä:
+Seuraavaksi voidaan jatkaa **Recon**-osion tehtäviä.
+
+### Recon
 
 #### 01. What is the channel that the wifi-global Access Point is currently using?
 
@@ -191,12 +195,151 @@ sudo mdk4 wlan70 p \
   -f wifi4.txt
 ```
 
+- **p** valitsee ns. SSID Probing and Bruteforcing -tilan, jossa ei pyritä murtamaan salasanaa vaan selvittämään piilotetun tukiaseman nimi.
+- **-t** lähettää probe-pyynnöt halutulle tukiasemalle (eli tässä tapauksessa tukiasemalle jonka MAC on F0:9F:C2:6A:88:26).
+- **-f** lukee sanalistat tiedostosta (Arch Linux, s.a)
+
 <p align="center">
 <img width="574" height="234" alt="image" src="https://github.com/user-attachments/assets/72f90938-6bab-4250-9520-6a5df994e66c" />
   <br>
   <em>Ei ole wifi-love eikä wifi-butt, mutta...</em>
 </p>
 
-Oikea vastaus on siis **wifi-free**. Sinänsä melko johdonmukaista, kun kyseessä oli myös avoin verkko. Tosin wifi-butt on sellainen SSID, jonka otan itselleni talteen tulevaisuutta ajatellen...
+Oikea vastaus on siis **wifi-free**. Sinänsä melko johdonmukaista, kun kyseessä oli myös avoin verkko. Tosin **wifi-butt** on sellainen SSID, jonka voisin ottaa itselleni talteen tulevaisuutta varten...
+
+### OPN
+
+#### 05. What is the flag in the hidden AP router behind default credentials?
+
+Eli jatketaan pidemmälle vielä mitä edellisessä tehtävässä oltiin jo löydetty. Tarkistetaan alkuun WLAN-rajapinnat komennolla ```iw dev```:
+
+```bash
+phy#70
+	Interface wlan70
+		ifindex 77
+		wdev 0x4600000001
+		addr 02:00:00:00:46:00
+		type monitor
+		channel 64 (5320 MHz), width: 20 MHz (no HT), center1: 5320 MHz
+		txpower 20.00 dBm
+phy#5
+	Interface wlan5
+		ifindex 12
+		wdev 0x500000001
+		addr 02:00:00:00:05:00
+		type managed
+		txpower 0.00 dBm
+phy#4
+	Interface wlan4
+		ifindex 11
+		wdev 0x400000001
+		addr 02:00:00:00:04:00
+		type managed
+		txpower 0.00 dBm
+phy#3
+	Interface wlan3
+		ifindex 10
+		wdev 0x300000001
+		addr 02:00:00:00:03:00
+		type managed
+		txpower 0.00 dBm
+phy#2
+	Interface wlan2
+		ifindex 9
+		wdev 0x200000001
+		addr 02:00:00:00:02:00
+		type managed
+		txpower 0.00 dBm
+phy#1
+	Interface wlan1
+		ifindex 8
+		wdev 0x100000001
+		addr 02:00:00:00:01:00
+		type managed
+		txpower 0.00 dBm
+phy#0
+	Interface wlan0
+		ifindex 7
+		wdev 0x1
+		addr 02:00:00:00:00:00
+		type managed
+		txpower 0.00 dBm
+```
+
+Koska wlan70 on **monitor**-tilainen rajapinta, on löydettävä verkkoon liittymiseen tarvittava **managed**-tilainen rajapinta. Koska kaikki managed-rajapinnat näyttivät samanlaisilta, päätin aloittaa **wlan0**-rajapinnasta, koska se on tavallisesti ensisijainen WLAN-rajapinta Linux-järjestelmissä. Otetaan verkkokortti käyttöön, jotta sillä voidaan skannata ja muodostaa yhteyksiä:
+
+```bash
+sudo ip link set wlan0 up
+```
+
+Koska meillä on edellisessä tehtävässä tiedossa halutun tukiaseman MAC-osoite, suoritetaan WLAN-skannaus, josta etsitään BSSID F0:9F:C2:6A:88:26 ja näytetään kyseisen tukiaseman tiedot sekä niitä ympäröivät rivit tarkempaa analysointia varten:
+
+```bash
+sudo iw dev wlan0 scan | grep -i -A30 -B10 "f0:9f:c2:6a:88:26"
+```
+
+<p align="center">
+<img width="612" height="190" alt="image" src="https://github.com/user-attachments/assets/93951e2a-1b14-4eac-8572-45fba84d2dbb" />
+  <br>
+  <em>Tuttu MAC</em>
+</p>
+
+Eli skannaus vahvisti, että kyseessä oli sama piilotettu tukiasema kuin aiemmin. Koska edellisessä tehtävässä oltiin selvitetty ESSID (wifi-free), muodostetaan yhteys, haetaan IP-osoite DHCP:llä ja tarkistetaan, että osoite on saatu:
+
+```bash
+sudo iw dev wlan0 connect wifi-free
+```
+
+```bash
+sudo dhclient wlan0
+```
+
+```bash
+ip addr show wlan0
+```
+
+<p align="center">
+<img width="883" height="150" alt="image" src="https://github.com/user-attachments/assets/4cf94209-af2a-4531-a987-c3a2dc3b8915" />
+  <br>
+  <em>Yhteys muodostettu!</em>
+</p>
+
+DHCP-palvelin oli myöntänyt osoitteen ja verkkoyhteys oli muodostunut onnistuneesti. Tarkistetaan vielä reititystiedot komennolla ```ip route``` ja tulosteesta näkyi, että WLAN-rajapinta on nyt liitetty verkkoon (**192.168.16.0/24 dev wlan0 proto kernel scope link src 192.168.16.61**) eli myös tukiasema on samassa aliverkossa. Kokeilin pingata default gateway -osoitteeseen, joka tässä tapauksessa oli 192.168.16.1 (default gateway käyttää usein aliverkon ensimmäistä osoitetta (.1), joten kyseinen osoite oli siksi luonnollinen tarkistuskohde). Kaikki pingaukset saivat vastauksen. 
+
+Kartoitetaan vielä varmuuden vuoksi tukiaseman palvelut porttiskannauksella:
+
+```bash
+nmap -sV 192.168.16.1
+```
+<p align="center">
+<img width="675" height="214" alt="image" src="https://github.com/user-attachments/assets/fe50c19e-bb69-4411-9ce7-b4453037988c" />
+  <br>
+  <em>Porttiskannauksen tulos</em>
+</p>
+
+HTTP- ja HTTPS-palveluiden perusteella voitiin päätellä, että tukiasemassa on selainpohjainen hallintaliittymä, joten kokeillaan selaimella mennä osoitteeseen https://192.168.16.1
+
+<p align="center">
+<img width="721" height="758" alt="image" src="https://github.com/user-attachments/assets/e0b17041-5b5d-412e-a92f-553446217cf7" />
+  <br>
+  <em>Hallintaliittymä - löydetty'd!</em>
+</p>
+
+Yritin alkuun muutamaa ilmiselvää käyttäjänimi + salasana -yhdistelmää, kuten **username** + **password**, mutta nämä eivät olleet oikeita. Lopulta ihan perus **admin** + **admin** päästi sisälle ja lippu löytyi.
+
+<p align="center">
+<img width="557" height="405" alt="image" src="https://github.com/user-attachments/assets/75bf42d3-c2f4-47c8-b1fd-84c5fc5e9693" />
+  <br>
+  <em>Lippu - löydetty'd!</em>
+</p>
 
 
+
+
+
+
+
+
+## Lähteet
+
+Arch Linux s.a. MDK4(2) System Calls Manual. Luettavissa: https://man.archlinux.org/man/extra/mdk4/mdk4.8.en. Luettu: 26.11.2026.
