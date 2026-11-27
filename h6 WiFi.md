@@ -369,7 +369,7 @@ sudo aircrack-ng wep.cap
   <em>Avain - löydetty'd</em>
 </p>
 
-Tämä ei kuitenkaan ole vielä lippu, koska tehtävänantona löytää se tukiaseman sivuilta.
+Aircrack-ng palautti WEP-avaimen muodossa 11:BB:33:CD:55. Yhteyttä muodostettaessa iw-komennon virheilmoituksesta havaittiin, että avain tulee syöttää 10-merkkisenä heksadesimaalijonona muodossa **d:index:data**. Tämän perusteella kaksoispisteet poistettiin, jolloin avaimesta muodostui **11BB33CD55** ja avaimen lopullinen muoto oli **d:0:11BB33CD55**. Koska aircrack-ng ei ilmoittanut käytössä olevaa avainindeksiä, käytettiin yleisintä WEP-verkkojen oletusindeksiä 0, mikä osoittautui toimivaksi ratkaisuksi. Muussa tapauksessa oltaisiin jouduttu kokeilemaan indeksejä 1, 2 tai 3, jos 0 ei olisi ollut oikea. 
 
 Koska wlan0 on edelleen edellisen tehtävän jäljiltä yhteydessä wifi-free -verkkoon, katkaistaan yhteys ja tarkistetaan yhteys:
 
